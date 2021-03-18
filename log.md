@@ -1,30 +1,72 @@
 # 100 Days Of Code - Log
 
-### Day 0: February 30, 2016 (Example 1)
-##### (delete me or comment me out)
+### Day 0: Mar 18th 2021
 
-**Today's Progress**: Fixed CSS, worked on canvas functionality for the app.
+**Today's Progress**: 
+i learned how to reverse string using javascript 
 
-**Thoughts:** I really struggled with CSS, but, overall, I feel like I am slowly getting better at it. Canvas is still new for me, but I managed to figure out some basic functionality.
-
-**Link to work:** [Calculator App](http://www.example.com)
-
-### Day 0: February 30, 2016 (Example 2)
-##### (delete me or comment me out)
-
-**Today's Progress**: Fixed CSS, worked on canvas functionality for the app.
-
-**Thoughts**: I really struggled with CSS, but, overall, I feel like I am slowly getting better at it. Canvas is still new for me, but I managed to figure out some basic functionality.
-
-**Link(s) to work**: [Calculator App](http://www.example.com)
+and i learned how to reverse string using golang
 
 
-### Day 1: June 27, Monday
 
-**Today's Progress**: I've gone through many exercises on FreeCodeCamp.
+**Thoughts:** :
+there are some differences between a for loop in javascript and golang.
+for example, for let x := 3; x--; x>0{}
+javascript will substract 3 with 1 first, so x = 2 is the first go in the body of a function, but
+Golang will NOT substract 3 with 1 first, so x = 3 is the first go in the body of a function.
 
-**Thoughts** I've recently started coding, and it's a great feeling when I finally solve an algorithm challenge after a lot of attempts and hours spent.
+in order to work the loop, we must consider the length of an arrays / slices and indexes (especially
+in golang ). example : len(array) - 1
 
-**Link(s) to work**
-1. [Find the Longest Word in a String](https://www.freecodecamp.com/challenges/find-the-longest-word-in-a-string)
-2. [Title Case a Sentence](https://www.freecodecamp.com/challenges/title-case-a-sentence)
+**Link to work:**:
+this is the code :
+
+javascript
+
+function reverseString(s){
+  let reversedString = []
+  let stringArray = s.split(" ")
+  for (let x = stringArray.length -1;x--;x>0){
+  	let temp = []
+  	for(let y = stringArray[x].length - 1;y--;y>0){
+      temp.push(stringArray[x][y])
+    }
+    reversedString.push(temp.join(""))
+    temp = []
+  }
+  return reversedString.join("	")
+}
+
+let question = "HELLO WORLD"
+let reversedQuestion = reverseString(question)
+console.log(reversedQuestion)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func reverseString(s string) string {
+	stringArray := strings.Split(s, " ")
+	var reversedString []string
+	for x := len(stringArray) - 1; x >= 0; x-- {
+		var temp []string
+		for y := len(stringArray[x]) - 1; y >= 0; y-- {
+			temp = append(temp, string(stringArray[x][y]))
+		}
+		reversedString = append(reversedString, strings.Join(temp, ""))
+		temp = nil
+	}
+	return strings.Join(reversedString, "	")
+}
+
+func main() {
+	var question string = "Hello playground"
+	var answer string = reverseString(question)
+	fmt.Println(answer)
+}
+
