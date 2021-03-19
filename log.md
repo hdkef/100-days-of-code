@@ -10,13 +10,8 @@ and i learned how to reverse string using golang
 
 
 **Thoughts:** :
-there are some differences between a for loop in javascript and golang.
-for example, for let x := 3; x--; x>0{}
-javascript will substract 3 with 1 first, so x = 2 is the first go in the body of a function, but
-Golang will NOT substract 3 with 1 first, so x = 3 is the first go in the body of a function.
 
-in order to work the loop, we must consider the length of an arrays / slices and indexes (especially
-in golang ). example : len(array) - 1
+first we need to split words between spaces, then rearrange words.
 
 **Link to work:**:
 this is the code :
@@ -24,19 +19,19 @@ this is the code :
 javascript
 
 function reverseString(s){
-  let reversedString = []
-  let stringArray = s.split(" ")
-  for (let x = stringArray.length -1;x--;x>0){
-  	let temp = []
-  	for(let y = stringArray[x].length - 1;y--;y>0){
-      temp.push(stringArray[x][y])
+    let reversedString = []
+    let stringArray = s.split(" ")
+    for (let x = stringArray.length - 1;x>=0;x--){
+        let temp = []
+        for(let y = stringArray[x].length - 1;y>=0;y--){
+            temp.push(stringArray[x][y])
+      }
+      reversedString.push(temp.join(""))
+      temp = []
     }
-    reversedString.push(temp.join(""))
-    temp = []
-  }
-  return reversedString.join("	")
+    return reversedString.join("	")
 }
-
+  
 let question = "HELLO WORLD"
 let reversedQuestion = reverseString(question)
 console.log(reversedQuestion)
@@ -69,4 +64,88 @@ func main() {
 	var answer string = reverseString(question)
 	fmt.Println(answer)
 }
+
+### Day 1: 19th Mar 2021
+
+**Today's Progress:**
+i learned how to factorialize using javascript and golang with two methods.
+Recursive function and standard.
+
+**Thoughts:**
+recursive -> we return the value * function(value - 1) and if value == 0 return 1
+non recursive -> we do for loop with decremental i then value = value * i
+
+**Link to Work:**
+
+javascript recursive method
+
+function factorialize(i){
+	if (i == 0){
+  	return 1
+  }
+  return i * factorialize(i-1)
+}
+
+let question = 10
+let answer = factorialize(5)
+console.log(answer)
+
+golang recursive method
+
+package main
+
+import "fmt"
+
+func factorialize(i int) int {
+	if i == 0 {
+		return 1
+	}
+	return i * factorialize(i-1)
+}
+
+func main() {
+	question := 5
+
+	var answer = factorialize(question)
+
+	fmt.Println(answer)
+}
+
+
+javascript non recursive method
+
+function factorialize(i){
+let tmp = 1
+for (let x = i;x>0;x--){
+console.log(x)
+  	tmp = tmp * x
+}
+return tmp
+}
+
+let question = 10
+let answer = factorialize(question)
+console.log(answer)
+
+
+golang non recursive method
+
+package main
+
+import "fmt"
+
+func factorialize(i int) int {
+	var tmp = 1
+	for x := i; x > 0; x-- {
+		tmp = tmp * x
+	}
+	return tmp
+}
+
+func main() {
+	question := 5
+	answer := factorialize(question)
+	fmt.Println(answer)
+}
+
 
