@@ -148,4 +148,57 @@ func main() {
 	fmt.Println(answer)
 }
 
+### Day 3: 20th Mar 2021
+
+**Today's Progress:**
+i learned how to check palindrome using javascript and golang.
+
+**Thoughts:**
+basically just replace space with none (eliminate spaces)then reverse the string using for loop,
+push, and joined again, then check the initial string and reversed string. 
+
+**Link to Work:**
+
+javascript
+
+function checkPalindrome(s){
+    let initString = s.replace(/\s/g, '')
+    let reverseString = []
+
+    for (let x = initString.length - 1;x>=0;x--){
+        reverseString.push(initString[x])
+    }
+
+    return initString == reverseString.join("")
+}
+
+let question = "NEVER ODD OR EVEN"
+let answer = checkPalindrome(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func checkPalindrome(s string) bool {
+	initString := strings.ReplaceAll(s, " ", "")
+	var reversedString []string
+	for x := len(initString) - 1; x >= 0; x-- {
+		reversedString = append(reversedString, string(initString[x]))
+	}
+	return initString == strings.Join(reversedString, "")
+}
+
+func main() {
+	question := "NEVER ODD OR EVEN"
+	answer := checkPalindrome(question)
+	fmt.Println(answer)
+}
+
+
 
