@@ -1,14 +1,16 @@
-function checkPalindrome(s){
-    let initString = s.replace(/\s/g, '')
-    let reverseString = []
-
-    for (let x = initString.length - 1;x>=0;x--){
-        reverseString.push(initString[x])
+function longestWords(w){
+    let wordArray = w.split(" ")
+    let lenTemp = 0
+    let indexTemp = 0
+    for (let x = wordArray.length-1;x>=0;x--){
+        if (wordArray[x].length > lenTemp){
+            lenTemp = wordArray[x].length
+            indexTemp = x
+        }
     }
-
-    return initString == reverseString.join("")
+    return wordArray[indexTemp]
 }
 
-let question = "NEVER ODD OR EVEN"
-let answer = checkPalindrome(question)
+let question = "NEVER ODD OR EVEN PTERODUCTYL"
+let answer = longestWords(question)
 console.log(answer)
