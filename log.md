@@ -200,5 +200,64 @@ func main() {
 	fmt.Println(answer)
 }
 
+### Day 3: 21st Mar 2021
+
+**Today's Progress:**
+i learned how to find longest words using javascript and golang.
+
+**Thoughts:**
+basically just split the sentences using Split assign to wordArray, for loop the len and change longest length to lenTemp and change longest index to indexTemp. Finally return wordArray at index of indexTemp
+
+**Link to Work:**
+
+Javascript
+
+function longestWords(w){
+    let wordArray = w.split(" ")
+    let lenTemp = 0
+    let indexTemp = 0
+    for (let x = wordArray.length-1;x>=0;x--){
+        if (wordArray[x].length > lenTemp){
+            lenTemp = wordArray[x].length
+            indexTemp = x
+        }
+    }
+    return wordArray[indexTemp]
+}
+
+let question = "NEVER ODD OR EVEN PTERODUCTYL"
+let answer = longestWords(question)
+console.log(answer)
+
+
+Golang
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func longestWords(w string) string {
+	var wordArray []string = strings.Split(w, " ")
+	var lenTemp int = 0
+	var indexTemp int
+	for x := len(wordArray) - 1; x >= 0; x-- {
+		if len(wordArray[x]) > lenTemp {
+			lenTemp = len(wordArray[x])
+			indexTemp = x
+		}
+	}
+	return wordArray[indexTemp]
+}
+
+func main() {
+	question := "NEVER ODD OR EVEN PIZZAHUT"
+	answer := longestWords(question)
+	fmt.Println(answer)
+}
+
+
 
 
