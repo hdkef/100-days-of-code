@@ -259,5 +259,61 @@ func main() {
 }
 
 
+### Day 4: 22nd Mar 2021
+
+**Today's Progress:**
+i learned how to titlecase sentences using javascript and golang.
+
+**Thoughts:**
+basically just split the sentences using Split assign to wordArray, for loop the len and create
+charArray then charArray[0].toUpperCase(), after that push to TitleCased (is an array). Finally
+return TitleCased.join(" )
+
+**Link to Work:**
+
+javascript
+
+function titleCase(w){
+    let wordArray = w.split(" ")
+    let titleCased = []
+    for (let x = 0;x<=wordArray.length-1;x++){
+        charArray = wordArray[x].split("")
+        charArray[0] = charArray[0].toUpperCase()
+        titleCased.push(charArray.join(""))
+    }
+    return titleCased.join(" ")
+}
+
+let question = "how can i move on when i'm still in love"
+let answer = titleCase(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func titleCase(w string) string {
+	wordArray := strings.Split(w, " ")
+	var titleCased []string
+	for x := 0; x <= len(wordArray)-1; x++ {
+		charArray := strings.Split(wordArray[x], "")
+		charArray[0] = strings.ToUpper(charArray[0])
+		titleCased = append(titleCased, strings.Join(charArray, ""))
+	}
+	return strings.Join(titleCased, " ")
+}
+
+func main() {
+	question := "how can i move on when i'm still in love"
+	answer := titleCase(question)
+	fmt.Println(answer)
+}
+
+
 
 

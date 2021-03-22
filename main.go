@@ -5,21 +5,19 @@ import (
 	"strings"
 )
 
-func longestWords(w string) string {
-	var wordArray []string = strings.Split(w, " ")
-	var lenTemp int = 0
-	var indexTemp int
-	for x := len(wordArray) - 1; x >= 0; x-- {
-		if len(wordArray[x]) > lenTemp {
-			lenTemp = len(wordArray[x])
-			indexTemp = x
-		}
+func titleCase(w string) string {
+	wordArray := strings.Split(w, " ")
+	var titleCased []string
+	for x := 0; x <= len(wordArray)-1; x++ {
+		charArray := strings.Split(wordArray[x], "")
+		charArray[0] = strings.ToUpper(charArray[0])
+		titleCased = append(titleCased, strings.Join(charArray, ""))
 	}
-	return wordArray[indexTemp]
+	return strings.Join(titleCased, " ")
 }
 
 func main() {
-	question := "NEVER ODD OR EVEN PIZZAHUT"
-	answer := longestWords(question)
+	question := "how can i move on when i'm still in love"
+	answer := titleCase(question)
 	fmt.Println(answer)
 }
