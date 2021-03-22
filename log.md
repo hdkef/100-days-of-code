@@ -200,7 +200,7 @@ func main() {
 	fmt.Println(answer)
 }
 
-### Day 3: 21st Mar 2021
+### Day 4: 21st Mar 2021
 
 **Today's Progress:**
 i learned how to find longest words using javascript and golang.
@@ -259,7 +259,7 @@ func main() {
 }
 
 
-### Day 4: 22nd Mar 2021
+### Day 5: 22nd Mar 2021
 
 **Today's Progress:**
 i learned how to titlecase sentences using javascript and golang.
