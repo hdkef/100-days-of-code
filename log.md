@@ -369,6 +369,45 @@ func main() {
 }
 
 
+### Day 7: 24th Mar 2021
+
+**Today's Progress:**
+i learned how to confirm ending of string using javascript and golang.
+
+**Thoughts:**
+basically just access last index (len - 1) of trimmed (replace " ", "") string equal second argument
+
+**Link to Work:**
+
+javascript
+
+function confirmEnding(a,b){
+    return a.replace(" ","").substr(-1,1).toUpperCase() == b.toUpperCase()
+}
+
+let question = "NOTHING BUT NOTHING"
+let answer = confirmEnding(question,"g")
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func confirmEnding(a string, b string) bool {
+	trimmed := strings.ReplaceAll(a, " ", "")
+	return string(trimmed[len(trimmed)-1]) == b
+}
+
+func main() {
+	question := "In The Middle"
+	answer := confirmEnding(question, "e")
+	fmt.Println(answer)
+}
 
 
 
