@@ -2,22 +2,20 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
-func titleCase(w string) string {
-	wordArray := strings.Split(w, " ")
-	var titleCased []string
-	for x := 0; x <= len(wordArray)-1; x++ {
-		charArray := strings.Split(wordArray[x], "")
-		charArray[0] = strings.ToUpper(charArray[0])
-		titleCased = append(titleCased, strings.Join(charArray, ""))
+func findBig(a []int) int {
+	biggestInt := 0
+	for x := 0; x <= len(a)-1; x++ {
+		if a[x] > biggestInt {
+			biggestInt = a[x]
+		}
 	}
-	return strings.Join(titleCased, " ")
+	return biggestInt
 }
 
 func main() {
-	question := "how can i move on when i'm still in love"
-	answer := titleCase(question)
+	question := []int{1, 2, 3, 4, 5, 6, 999999, 1023}
+	answer := findBig(question)
 	fmt.Println(answer)
 }

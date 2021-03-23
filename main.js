@@ -1,14 +1,17 @@
-function titleCase(w){
-    let wordArray = w.split(" ")
-    let titleCased = []
-    for (let x = 0;x<=wordArray.length-1;x++){
-        charArray = wordArray[x].split("")
-        charArray[0] = charArray[0].toUpperCase()
-        titleCased.push(charArray.join(""))
+function findBig(a){
+    let biggestInt = 0
+    try{
+        for (let x = 0;x<=a.length-1;x++){
+            if (a[x] > biggestInt){
+                biggestInt = a[x]
+            }
+        }
+        return biggestInt
+    }catch(err){
+        console.log(err)
     }
-    return titleCased.join(" ")
 }
 
-let question = "how can i move on when i'm still in love"
-let answer = titleCase(question)
+let question = [2,1,2,34,787,99999]
+let answer = findBig(question)
 console.log(answer)

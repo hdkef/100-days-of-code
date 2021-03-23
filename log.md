@@ -314,6 +314,61 @@ func main() {
 	fmt.Println(answer)
 }
 
+### Day 6: 23rd Mar 2021
+
+**Today's Progress:**
+i learned how to find biggest integer using javascript and golang.
+
+**Thoughts:**
+basically just for loop and check if a[i] > biggestInt and return biggestInt after looping
+
+**Link to Work:**
+
+javascript
+
+function findBig(a){
+    let biggestInt = 0
+    try{
+        for (let x = 0;x<=a.length-1;x++){
+            if (a[x] > biggestInt){
+                biggestInt = a[x]
+            }
+        }
+        return biggestInt
+    }catch(err){
+        console.log(err)
+    }
+}
+
+let question = [2,1,2,34,787,99999]
+let answer = findBig(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+)
+
+func findBig(a []int) int {
+	biggestInt := 0
+	for x := 0; x <= len(a)-1; x++ {
+		if a[x] > biggestInt {
+			biggestInt = a[x]
+		}
+	}
+	return biggestInt
+}
+
+func main() {
+	question := []int{1, 2, 3, 4, 5, 6, 999999, 1023}
+	answer := findBig(question)
+	fmt.Println(answer)
+}
+
+
 
 
 
