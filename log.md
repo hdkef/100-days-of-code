@@ -409,5 +409,67 @@ func main() {
 	fmt.Println(answer)
 }
 
+### Day 8: 25th Mar 2021
 
+**Today's Progress:**
+i learned how to find diff of diagonal of matrix (multi dim array) using javascript and golang.
 
+**Thoughts:**
+items of left to right diagonal is basically access array with the same index [i][i]
+and right to left is [i][j] and j is decrement of the index length. At the end return the math.Abs(ltr - rtl) to make the dif positive
+
+**Link to Work:**
+
+javascript
+
+function diagonalDiff(m){
+    var leftToRight = 0
+    var rightToLeft = 0
+    let i = 0
+    while (i <= m.length - 1){
+        leftToRight += m[i][i]
+        console.log(m[i][i])
+        let j = m.length - 1 - i
+        rightToLeft += m[i][j]
+        console.log(m[i][j])
+        i++
+        console.log(rightToLeft,leftToRight)
+    }
+    return Math.abs(leftToRight - rightToLeft)
+}
+
+let question = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
+let answer = diagonalDiff(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func diagonalDiff(m [][]int) int {
+	leftToRight := 0
+	rightToLeft := 0
+	i := 0
+	for {
+		if i > len(m)-1 {
+			break
+		}
+		j := len(m) - 1 - i
+		leftToRight += m[i][i]
+		rightToLeft += m[i][j]
+		fmt.Println(leftToRight, rightToLeft)
+		i++
+	}
+	return int(math.Abs(float64(leftToRight) - float64(rightToLeft)))
+}
+
+func main() {
+	var question = [][]int{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}}
+	answer := diagonalDiff(question)
+	fmt.Println(answer)
+}
