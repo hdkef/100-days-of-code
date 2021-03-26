@@ -1,19 +1,24 @@
-function diagonalDiff(m){
-    var leftToRight = 0
-    var rightToLeft = 0
-    let i = 0
-    while (i <= m.length - 1){
-        leftToRight += m[i][i]
-        console.log(m[i][i])
-        let j = m.length - 1 - i
-        rightToLeft += m[i][j]
-        console.log(m[i][j])
-        i++
-        console.log(rightToLeft,leftToRight)
+function findPath(a){
+    let pLen = a.length
+    let i = -1
+    let path = []
+    while (i < pLen){
+        i+=2
+        switch (a[i]){
+            case 0:
+                path.push(i)
+                break
+            case 1:
+                i-=1
+                if (a[i] == 0){
+                    path.push(i)
+                }
+                break
+        }
     }
-    return Math.abs(leftToRight - rightToLeft)
+    return path
 }
 
-let question = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
-let answer = diagonalDiff(question)
+let question = [0,1,0,0,1,0,0,1,0,0,1,0]
+let answer = findPath(question)
 console.log(answer)

@@ -473,3 +473,78 @@ func main() {
 	answer := diagonalDiff(question)
 	fmt.Println(answer)
 }
+
+### Day 9: 26th Mar 2021
+
+**Today's Progress:**
+i learned how to solve hackerrank jump on the clouds using javascript and golang.
+
+**Thoughts:**
+i need to be consider the placement of break statement and when should we use > or >=
+
+**Link to Work:**
+
+javascript
+
+function findPath(a){
+    let pLen = a.length
+    let i = -1
+    let path = []
+    while (i < pLen){
+        i+=2
+        switch (a[i]){
+            case 0:
+                path.push(i)
+                break
+            case 1:
+                i-=1
+                if (a[i] == 0){
+                    path.push(i)
+                }
+                break
+        }
+    }
+    return path
+}
+
+let question = [0,1,0,0,1,0,0,1,0,0,1,0]
+let answer = findPath(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+)
+
+func findPath(a []int) []int {
+	m := len(a)
+	i := -1
+	var path []int
+	for {
+		i += 2
+		if i > m {
+			break
+		}
+		fmt.Println("i", i)
+		fmt.Println("path", path)
+		switch a[i] {
+		case 0:
+			path = append(path, i)
+		case 1:
+			i -= 1
+			if a[i] == 0 {
+				path = append(path, i)
+			}
+		}
+	}
+	return path
+}
+
+func main() {
+	var question = []int{0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0}
+	answer := findPath(question)
+	fmt.Println(answer)
+}
