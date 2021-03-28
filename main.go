@@ -2,34 +2,28 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
-func findPath(a []int) []int {
-	m := len(a)
-	i := -1
-	var path []int
-	for {
-		i += 2
-		if i > m {
-			break
-		}
-		fmt.Println("i", i)
-		fmt.Println("path", path)
-		switch a[i] {
-		case 0:
-			path = append(path, i)
-		case 1:
-			i -= 1
-			if a[i] == 0 {
-				path = append(path, i)
+func balanceBracket(ar string) bool {
+	a := strings.Split(ar, "")
+	var bracket []int
+	for x := 0; x <= len(a)-1; x++ {
+		if a[x] == "{" || a[x] == "[" || a[x] == "(" {
+			bracket = append(bracket, 1)
+		} else {
+			if len(bracket) == 0 {
+				bracket = []int{1}
+				break
 			}
+			bracket = bracket[0 : len(bracket)-1]
 		}
 	}
-	return path
+	return len(bracket) == 0
 }
 
 func main() {
-	var question = []int{0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0}
-	answer := findPath(question)
+	var question = "[{(){}}]"
+	answer := balanceBracket(question)
 	fmt.Println(answer)
 }

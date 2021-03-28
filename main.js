@@ -1,24 +1,21 @@
-function findPath(a){
-    let pLen = a.length
-    let i = -1
-    let path = []
-    while (i < pLen){
-        i+=2
-        switch (a[i]){
-            case 0:
-                path.push(i)
+function balanceBracket(ar){
+    let a = ar.split("")
+    let bracketStack = []
+    for (let x = 0;x <= a.length - 1;x++){
+        if (a[x] == '[' || a[x] == '{' || a[x] == '('){
+            bracketStack.push(1)
+        }
+        else{
+            if (bracketStack.length == 0){
+                bracketStack.push(1)
                 break
-            case 1:
-                i-=1
-                if (a[i] == 0){
-                    path.push(i)
-                }
-                break
+            }
+            else{bracketStack.pop()}
         }
     }
-    return path
+    return bracketStack.length == 0
 }
 
-let question = [0,1,0,0,1,0,0,1,0,0,1,0]
-let answer = findPath(question)
+let question = "[{(){}}]"
+let answer = balanceBracket(question)
 console.log(answer)
