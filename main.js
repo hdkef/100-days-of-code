@@ -1,21 +1,22 @@
-function balanceBracket(ar){
+function countValley(ar){
     let a = ar.split("")
-    let bracketStack = []
+    let alt = 0
+    num_valley = 0
     for (let x = 0;x <= a.length - 1;x++){
-        if (a[x] == '[' || a[x] == '{' || a[x] == '('){
-            bracketStack.push(1)
-        }
-        else{
-            if (bracketStack.length == 0){
-                bracketStack.push(1)
-                break
+        if (ar[x] == "U"){
+            if(alt == -1){
+                num_valley++
             }
-            else{bracketStack.pop()}
+            alt++
         }
+        else if (ar[x] == "D"){
+            alt--
+        }
+        else{console.log("err")}
     }
-    return bracketStack.length == 0
+    return num_valley
 }
 
-let question = "[{(){}}]"
-let answer = balanceBracket(question)
+let question = "DDUUDDUUDDUU"
+let answer = countValley(question)
 console.log(answer)

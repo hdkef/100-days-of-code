@@ -615,3 +615,72 @@ func main() {
 	answer := balanceBracket(question)
 	fmt.Println(answer)
 }
+
+### Day 12: 29th Mar 2021
+
+**Today's Progress:**
+i learned how to count valleys using javascript and golang.
+
+**Thoughts:**
+basically create alt, if up ++ if down -- and if up check if alt -1 then numval++s
+
+**Link to Work:**
+
+javascript
+
+function countValley(ar){
+    let a = ar.split("")
+    let alt = 0
+    num_valley = 0
+    for (let x = 0;x <= a.length - 1;x++){
+        if (ar[x] == "U"){
+            if(alt == -1){
+                num_valley++
+            }
+            alt++
+        }
+        else if (ar[x] == "D"){
+            alt--
+        }
+        else{console.log("err")}
+    }
+    return num_valley
+}
+
+let question = "DDUUDDUUDDUU"
+let answer = countValley(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func countValley(ar string) int {
+	a := strings.Split(ar, "")
+	numval := 0
+	alt := 0
+	for x := 0; x <= len(a)-1; x++ {
+		if a[x] == "U" {
+			if alt == -1 {
+				numval++
+			}
+			alt++
+		} else if a[x] == "D" {
+			alt--
+		} else {
+			fmt.Println("err")
+		}
+	}
+	return numval
+}
+
+func main() {
+	var question = "DDUUDDUUDDUU"
+	answer := countValley(question)
+	fmt.Println(answer)
+}
