@@ -557,6 +557,7 @@ i learned how to examine balanced bracketusing javascript and golang.
 **Thoughts:**
 basically push if left bracket and pop if right bracket, don't forget to check if we can't pop a zero len array.
 Golang use slice to pop btw
+Check popped value, if its not the corresponding left bracket return NO
 
 **Link to Work:**
 
@@ -567,20 +568,41 @@ function balanceBracket(ar){
     let bracketStack = []
     for (let x = 0;x <= a.length - 1;x++){
         if (a[x] == '[' || a[x] == '{' || a[x] == '('){
-            bracketStack.push(1)
+            bracketStack.push(a[x])
         }
         else{
             if (bracketStack.length == 0){
-                bracketStack.push(1)
+                bracketStack = ["NO"]
                 break
             }
-            else{bracketStack.pop()}
+            else{
+                let popval = bracketStack.pop()
+                console.log(popval)
+                switch (a[x]){
+                    case "}":
+                        if (popval != "{"){
+                            bracketStack = ["NO"]
+                        }
+                        break
+                    case "]":
+                        if (popval != "["){
+                            bracketStack = ["NO"]
+                        }
+                        break
+                    case ")":
+                        if (popval != "("){
+                            bracketStack = ["NO"]
+                        }
+                        break
+                }
+            }
         }
     }
+    console.log(bracketStack)
     return bracketStack.length == 0
 }
 
-let question = "[{(){}}]"
+let question = "[{(){}}][]"
 let answer = balanceBracket(question)
 console.log(answer)
 
@@ -595,26 +617,45 @@ import (
 
 func balanceBracket(ar string) bool {
 	a := strings.Split(ar, "")
-	var bracket []int
+	var bracket []string
 	for x := 0; x <= len(a)-1; x++ {
 		if a[x] == "{" || a[x] == "[" || a[x] == "(" {
-			bracket = append(bracket, 1)
+			bracket = append(bracket, a[x])
 		} else {
 			if len(bracket) == 0 {
-				bracket = []int{1}
+				bracket = []string{"NO"}
 				break
 			}
-			bracket = bracket[0 : len(bracket)-1]
+			popval := bracket[len(bracket)-1]
+			switch a[x] {
+			case "[":
+				if popval != "]" {
+					bracket = append(bracket, "NO")
+				}
+				break
+			case "{":
+				if popval != "}" {
+					bracket = append(bracket, "NO")
+				}
+				break
+			case "(":
+				if popval != ")" {
+					bracket = append(bracket, "NO")
+				}
+				break
+			}
+			bracket = bracket[:len(bracket)-1]
 		}
 	}
 	return len(bracket) == 0
 }
 
 func main() {
-	var question = "[{(){}}]"
+	var question = "[{(){}}]()]"
 	answer := balanceBracket(question)
 	fmt.Println(answer)
 }
+
 
 ### Day 12: 29th Mar 2021
 

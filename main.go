@@ -5,27 +5,43 @@ import (
 	"strings"
 )
 
-func countValley(ar string) int {
+func balanceBracket(ar string) bool {
 	a := strings.Split(ar, "")
-	numval := 0
-	alt := 0
+	var bracket []string
 	for x := 0; x <= len(a)-1; x++ {
-		if a[x] == "U" {
-			if alt == -1 {
-				numval++
-			}
-			alt++
-		} else if a[x] == "D" {
-			alt--
+		if a[x] == "{" || a[x] == "[" || a[x] == "(" {
+			bracket = append(bracket, a[x])
 		} else {
-			fmt.Println("err")
+			if len(bracket) == 0 {
+				bracket = []string{"NO"}
+				break
+			}
+			popval := bracket[len(bracket)-1]
+			switch a[x] {
+			case "[":
+				if popval != "]" {
+					bracket = append(bracket, "NO")
+				}
+				break
+			case "{":
+				if popval != "}" {
+					bracket = append(bracket, "NO")
+				}
+				break
+			case "(":
+				if popval != ")" {
+					bracket = append(bracket, "NO")
+				}
+				break
+			}
+			bracket = bracket[:len(bracket)-1]
 		}
 	}
-	return numval
+	return len(bracket) == 0
 }
 
 func main() {
-	var question = "DDUUDDUUDDUU"
-	answer := countValley(question)
+	var question = "[{(){}}]()]"
+	answer := balanceBracket(question)
 	fmt.Println(answer)
 }
