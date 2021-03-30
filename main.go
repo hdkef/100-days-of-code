@@ -2,46 +2,25 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
-func balanceBracket(ar string) bool {
-	a := strings.Split(ar, "")
-	var bracket []string
-	for x := 0; x <= len(a)-1; x++ {
-		if a[x] == "{" || a[x] == "[" || a[x] == "(" {
-			bracket = append(bracket, a[x])
+func countPair(ar []int) int {
+	mapPair := make(map[int]int)
+	numPair := 0
+	for _, x := range ar {
+		_, found := mapPair[x]
+		if found == false {
+			mapPair[x] = x
 		} else {
-			if len(bracket) == 0 {
-				bracket = []string{"NO"}
-				break
-			}
-			popval := bracket[len(bracket)-1]
-			switch a[x] {
-			case "[":
-				if popval != "]" {
-					bracket = append(bracket, "NO")
-				}
-				break
-			case "{":
-				if popval != "}" {
-					bracket = append(bracket, "NO")
-				}
-				break
-			case "(":
-				if popval != ")" {
-					bracket = append(bracket, "NO")
-				}
-				break
-			}
-			bracket = bracket[:len(bracket)-1]
+			delete(mapPair, x)
+			numPair++
 		}
 	}
-	return len(bracket) == 0
+	return numPair
 }
 
 func main() {
-	var question = "[{(){}}]()]"
-	answer := balanceBracket(question)
+	var question = []int{1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 5, 6, 7}
+	answer := countPair(question)
 	fmt.Println(answer)
 }

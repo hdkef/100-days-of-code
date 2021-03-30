@@ -725,3 +725,64 @@ func main() {
 	answer := countValley(question)
 	fmt.Println(answer)
 }
+
+### Day 13: 30th Mar 2021
+
+**Today's Progress:**
+i learned how to solve hackerrank count sock pair javascript and golang.
+
+**Thoughts:**
+basically create map and for loop the array. If there's map has no key of color then set new key of color. If map has then delete that key and numPair++.
+ATTENTION : Javascript's Map different than golang. Javascript's map is an instance of a class so that to set, delete, and has need to use method.
+
+**Link to Work:**
+
+javascript
+
+function countPair(ar){
+    let mapPair = new Map()
+    let numPair = 0
+    for (x of ar){
+        if (mapPair.has(x)){
+            let tes = mapPair.delete(x)
+            numPair++
+        }
+        else{
+            mapPair.set(x,x)
+        }
+    }
+    return numPair
+}
+
+let question = [1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 5, 6, 7]
+let answer = countPair(question)
+console.log(answer)
+
+Golang
+
+package main
+
+import (
+	"fmt"
+)
+
+func countPair(ar []int) int {
+	mapPair := make(map[int]int)
+	numPair := 0
+	for _, x := range ar {
+		_, found := mapPair[x]
+		if found == false {
+			mapPair[x] = x
+		} else {
+			delete(mapPair, x)
+			numPair++
+		}
+	}
+	return numPair
+}
+
+func main() {
+	var question = []int{1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 5, 6, 7}
+	answer := countPair(question)
+	fmt.Println(answer)
+}
