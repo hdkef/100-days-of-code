@@ -786,3 +786,88 @@ func main() {
 	answer := countPair(question)
 	fmt.Println(answer)
 }
+
+### Day 14: 31th Mar 2021
+
+**Today's Progress:**
+i learned how to solve hackerrank highest luck javascript and golang.
+
+**Thoughts:**
+basically sort multidim and for loop so that we can get important contest's luck value order after that if m is lower than k and value is important then += luckVal and m++.
+The thing is if in javascript we just pass function to sort parameter, in golang we need to create type and create func of Len, Less, and Swap to sort
+
+**Link to Work:**
+
+javascript
+
+function highestLuck(ar,k){
+    let sortedArray = []
+    let maxPoints = 0
+    let m = 0
+    ar.sort((a,b)=>{
+        return a[0] - b[0]
+    })
+    sortedArray = ar.sort()
+    console.log(sortedArray)
+    for (let x = sortedArray.length-1;x>=0;x--){
+        if (sortedArray[x][1] != 0 && m<k){
+            maxPoints+=ar[x][0]
+            m++
+        }
+        else if(sortedArray[x][1] == 0){
+            maxPoints+=ar[x][0]
+        }
+    }
+    return maxPoints
+}
+
+let question = [[1, 1], [2, 1], [3, 0], [4, 1], [5, 0], [6, 1]]
+let answer = highestLuck(question,2)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+type multiDim [][]int
+
+func (a multiDim) Len() int {
+	return len(a)
+}
+
+func (a multiDim) Swap(i, j int) {
+	a[i], a[j] = a[j], a[i]
+}
+
+func (a multiDim) Less(i, j int) bool {
+	return a[j][0] < a[i][0]
+}
+
+func highestLuck(ar [][]int, k int) int {
+	var sortedArray multiDim
+	sortedArray = multiDim(ar)
+	maxPoints := 0
+	m := 0
+	sort.Sort(multiDim(sortedArray))
+	fmt.Println(sortedArray)
+	for x := 0; x <= len(sortedArray)-1; x++ {
+		if sortedArray[x][1] != 0 && m < k {
+			m++
+			maxPoints += sortedArray[x][0]
+		} else if sortedArray[x][1] == 0 {
+			maxPoints += sortedArray[x][0]
+		}
+	}
+	return maxPoints
+}
+
+func main() {
+	var question = [][]int{{1, 1}, {2, 1}, {3, 0}, {4, 1}, {5, 0}, {6, 1}}
+	answer := highestLuck(question, 2)
+	fmt.Println(answer)
+}

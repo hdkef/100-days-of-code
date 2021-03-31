@@ -1,18 +1,24 @@
-function countPair(ar){
-    let mapPair = new Map()
-    let numPair = 0
-    for (x of ar){
-        if (mapPair.has(x)){
-            let tes = mapPair.delete(x)
-            numPair++
+function highestLuck(ar,k){
+    let sortedArray = []
+    let maxPoints = 0
+    let m = 0
+    ar.sort((a,b)=>{
+        return a[0] - b[0]
+    })
+    sortedArray = ar.sort()
+    console.log(sortedArray)
+    for (let x = sortedArray.length-1;x>=0;x--){
+        if (sortedArray[x][1] != 0 && m<k){
+            maxPoints+=ar[x][0]
+            m++
         }
-        else{
-            mapPair.set(x,x)
+        else if(sortedArray[x][1] == 0){
+            maxPoints+=ar[x][0]
         }
     }
-    return numPair
+    return maxPoints
 }
 
-let question = [1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 5, 6, 7]
-let answer = countPair(question)
+let question = [[1, 1], [2, 1], [3, 0], [4, 1], [5, 0], [6, 1]]
+let answer = highestLuck(question,2)
 console.log(answer)
