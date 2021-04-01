@@ -1,24 +1,21 @@
-function highestLuck(ar,k){
-    let sortedArray = []
-    let maxPoints = 0
-    let m = 0
-    ar.sort((a,b)=>{
-        return a[0] - b[0]
-    })
-    sortedArray = ar.sort()
-    console.log(sortedArray)
-    for (let x = sortedArray.length-1;x>=0;x--){
-        if (sortedArray[x][1] != 0 && m<k){
-            maxPoints+=ar[x][0]
-            m++
-        }
-        else if(sortedArray[x][1] == 0){
-            maxPoints+=ar[x][0]
+function lowestAbsDif(ar){
+    let value = Number.POSITIVE_INFINITY
+    for (let i = 0;i<=ar.length-1;i++){
+        for(let j = 0;j<=ar.length-1;j++){
+            if (j == i){
+                continue
+            }
+            else{
+                let dif = Math.abs(ar[i]-ar[j])
+                if (dif < value){
+                    value = dif
+                }
+            }
         }
     }
-    return maxPoints
+    return value
 }
 
-let question = [[1, 1], [2, 1], [3, 0], [4, 1], [5, 0], [6, 1]]
-let answer = highestLuck(question,2)
+let question = [8,19,3]
+let answer = lowestAbsDif(question)
 console.log(answer)

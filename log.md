@@ -871,3 +871,69 @@ func main() {
 	answer := highestLuck(question, 2)
 	fmt.Println(answer)
 }
+
+### Day 15: 1st Apr 2021
+
+**Today's Progress:**
+i learned how to solve hackerrank find minimal absolute dif javascript and golang.
+
+**Thoughts:**
+basically double loop the array and if i==j continue, else check math.abs(ar[i]-ar[j]) if that lower than recently minimal value than assign it
+
+**Link to Work:**
+
+javascript
+
+function lowestAbsDif(ar){
+    let value = Number.POSITIVE_INFINITY
+    for (let i = 0;i<=ar.length-1;i++){
+        for(let j = 0;j<=ar.length-1;j++){
+            if (j == i){
+                continue
+            }
+            else{
+                let dif = Math.abs(ar[i]-ar[j])
+                if (dif < value){
+                    value = dif
+                }
+            }
+        }
+    }
+    return value
+}
+
+let question = [8,19,3]
+let answer = lowestAbsDif(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func lowestAbsDif(ar []int) float64 {
+	var min float64 = math.MaxFloat64
+	for i := 0; i <= len(ar)-1; i++ {
+		for j := 0; j <= len(ar)-1; j++ {
+			if j == i {
+				continue
+			} else {
+				dif := math.Abs(float64(ar[j]) - float64(ar[i]))
+				if dif < min {
+					min = dif
+				}
+			}
+		}
+	}
+	return min
+}
+
+func main() {
+	var question = []int{10, 1, 200}
+	answer := lowestAbsDif(question)
+	fmt.Println(answer)
+}

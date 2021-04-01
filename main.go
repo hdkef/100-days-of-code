@@ -2,43 +2,28 @@ package main
 
 import (
 	"fmt"
-	"sort"
+	"math"
 )
 
-type multiDim [][]int
-
-func (a multiDim) Len() int {
-	return len(a)
-}
-
-func (a multiDim) Swap(i, j int) {
-	a[i], a[j] = a[j], a[i]
-}
-
-func (a multiDim) Less(i, j int) bool {
-	return a[j][0] < a[i][0]
-}
-
-func highestLuck(ar [][]int, k int) int {
-	var sortedArray multiDim
-	sortedArray = multiDim(ar)
-	maxPoints := 0
-	m := 0
-	sort.Sort(multiDim(sortedArray))
-	fmt.Println(sortedArray)
-	for x := 0; x <= len(sortedArray)-1; x++ {
-		if sortedArray[x][1] != 0 && m < k {
-			m++
-			maxPoints += sortedArray[x][0]
-		} else if sortedArray[x][1] == 0 {
-			maxPoints += sortedArray[x][0]
+func lowestAbsDif(ar []int) float64 {
+	var min float64 = math.MaxFloat64
+	for i := 0; i <= len(ar)-1; i++ {
+		for j := 0; j <= len(ar)-1; j++ {
+			if j == i {
+				continue
+			} else {
+				dif := math.Abs(float64(ar[j]) - float64(ar[i]))
+				if dif < min {
+					min = dif
+				}
+			}
 		}
 	}
-	return maxPoints
+	return min
 }
 
 func main() {
-	var question = [][]int{{1, 1}, {2, 1}, {3, 0}, {4, 1}, {5, 0}, {6, 1}}
-	answer := highestLuck(question, 2)
+	var question = []int{10, 1, 200}
+	answer := lowestAbsDif(question)
 	fmt.Println(answer)
 }
