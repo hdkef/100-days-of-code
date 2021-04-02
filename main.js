@@ -1,21 +1,21 @@
-function lowestAbsDif(ar){
-    let value = Number.POSITIVE_INFINITY
-    for (let i = 0;i<=ar.length-1;i++){
-        for(let j = 0;j<=ar.length-1;j++){
-            if (j == i){
-                continue
-            }
-            else{
-                let dif = Math.abs(ar[i]-ar[j])
-                if (dif < value){
-                    value = dif
-                }
-            }
+function alternateChar(s){
+    let arrChar = s.split("")
+    let charStack = []
+    for (let x = 0;x <= arrChar.length-1;x++){
+        if (x == arrChar.length-1){
+            charStack.push(arrChar[x])
+            break
+        }
+        else if (arrChar[x] == arrChar[x+1] && x+1 < arrChar.length){
+            continue
+        }
+        else{
+            charStack.push(arrChar[x])
         }
     }
-    return value
+    return charStack.join("")
 }
 
-let question = [8,19,3]
-let answer = lowestAbsDif(question)
+let question = "AAABBBCCCDDDEEE"
+let answer = alternateChar(question)
 console.log(answer)

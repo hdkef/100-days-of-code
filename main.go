@@ -2,28 +2,28 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"strings"
 )
 
-func lowestAbsDif(ar []int) float64 {
-	var min float64 = math.MaxFloat64
-	for i := 0; i <= len(ar)-1; i++ {
-		for j := 0; j <= len(ar)-1; j++ {
-			if j == i {
-				continue
-			} else {
-				dif := math.Abs(float64(ar[j]) - float64(ar[i]))
-				if dif < min {
-					min = dif
-				}
-			}
+func alternateChar(s string) string {
+	arChar := strings.Split(s, "")
+	var charStack []string
+	for x, _ := range arChar {
+		if x == len(arChar)-1 {
+			charStack = append(charStack, arChar[x])
+			break
+		} else if arChar[x] == arChar[x+1] && x < len(arChar) {
+			continue
+		} else {
+			charStack = append(charStack, arChar[x])
 		}
 	}
-	return min
+
+	return strings.Join(charStack, "")
 }
 
 func main() {
-	var question = []int{10, 1, 200}
-	answer := lowestAbsDif(question)
+	var question string = "AAABBBCCCDDDEEE"
+	answer := alternateChar(question)
 	fmt.Println(answer)
 }

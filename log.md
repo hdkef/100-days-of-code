@@ -937,3 +937,70 @@ func main() {
 	answer := lowestAbsDif(question)
 	fmt.Println(answer)
 }
+
+
+### Day 16: 2nd Apr 2021
+
+**Today's Progress:**
+i learned how to solve hackerrank alternate character in javascript and golang.
+
+**Thoughts:**
+just for loop the splitted string then check if index x equal x+1 then continue, if x equal len - 1 or the last index append/push to stack and break the loop and else append/push to stack. Finally return stack.Join
+
+**Link to Work:**
+
+javascript
+
+function alternateChar(s){
+    let arrChar = s.split("")
+    let charStack = []
+    for (let x = 0;x <= arrChar.length-1;x++){
+        if (x == arrChar.length-1){
+            charStack.push(arrChar[x])
+            break
+        }
+        else if (arrChar[x] == arrChar[x+1] && x+1 < arrChar.length){
+            continue
+        }
+        else{
+            charStack.push(arrChar[x])
+        }
+    }
+    return charStack.join("")
+}
+
+let question = "AAABBBCCCDDDEEE"
+let answer = alternateChar(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func alternateChar(s string) string {
+	arChar := strings.Split(s, "")
+	var charStack []string
+	for x, _ := range arChar {
+		if x == len(arChar)-1 {
+			charStack = append(charStack, arChar[x])
+			break
+		} else if arChar[x] == arChar[x+1] && x < len(arChar) {
+			continue
+		} else {
+			charStack = append(charStack, arChar[x])
+		}
+	}
+
+	return strings.Join(charStack, "")
+}
+
+func main() {
+	var question string = "AAABBBCCCDDDEEE"
+	answer := alternateChar(question)
+	fmt.Println(answer)
+}
