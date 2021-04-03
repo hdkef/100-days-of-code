@@ -1004,3 +1004,60 @@ func main() {
 	answer := alternateChar(question)
 	fmt.Println(answer)
 }
+
+### Day 17: 3rd Apr 2021
+
+**Today's Progress:**
+i learned how to solve hackerrank check analgam in javascript and golang.
+
+**Thoughts:**
+just check length, if not then false. if same convert string to []bye / UTF / ASCII then for loop and sum them and finally compare them
+**Link to Work:**
+
+javascript
+
+function isAnagram(a,b){
+    if (a.length != b.length){
+        return false
+    }
+    let firstSum = 0
+    let secondSum = 0
+    for (let x=0;x<a.length;x++){
+        firstSum+=a.charCodeAt(x)
+        secondSum+=b.charCodeAt(x)
+    }
+    return firstSum == secondSum
+}
+
+let question = "PEOPLE"
+let answer = isAnagram(question,"EPPLO")
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+)
+
+func isAnagram(a, b string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	var firstArr []byte = []byte(a)
+	var secondArr []byte = []byte(b)
+	var firstSum byte
+	var secondSum byte
+	for x := 0; x < len(firstArr); x++ {
+		firstSum += firstArr[x]
+		secondSum += secondArr[x]
+	}
+	return firstSum == secondSum
+}
+
+func main() {
+	var question string = "PEOPLE"
+	answer := isAnagram(question, "PLEOEP")
+	fmt.Println(answer)
+}

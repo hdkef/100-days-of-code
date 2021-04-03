@@ -2,28 +2,25 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
-func alternateChar(s string) string {
-	arChar := strings.Split(s, "")
-	var charStack []string
-	for x, _ := range arChar {
-		if x == len(arChar)-1 {
-			charStack = append(charStack, arChar[x])
-			break
-		} else if arChar[x] == arChar[x+1] && x < len(arChar) {
-			continue
-		} else {
-			charStack = append(charStack, arChar[x])
-		}
+func isAnagram(a, b string) bool {
+	if len(a) != len(b) {
+		return false
 	}
-
-	return strings.Join(charStack, "")
+	var firstArr []byte = []byte(a)
+	var secondArr []byte = []byte(b)
+	var firstSum byte
+	var secondSum byte
+	for x := 0; x < len(firstArr); x++ {
+		firstSum += firstArr[x]
+		secondSum += secondArr[x]
+	}
+	return firstSum == secondSum
 }
 
 func main() {
-	var question string = "AAABBBCCCDDDEEE"
-	answer := alternateChar(question)
+	var question string = "PEOPLE"
+	answer := isAnagram(question, "PLEOEP")
 	fmt.Println(answer)
 }
