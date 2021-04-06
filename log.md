@@ -1061,3 +1061,122 @@ func main() {
 	answer := isAnagram(question, "PLEOEP")
 	fmt.Println(answer)
 }
+
+### Day 19: 5th Apr 2021
+
+**Today's Progress:**
+1) i learned how to solve hackerrank find toys in javascript and golang.
+2) i learned how to solve hackerrank left rotation in javascript and golang.
+3)
+
+**Thoughts:**
+1) similar to the highest luck challenge
+2) in golang we just slice k: and then append :k... but in javascript we double for loop first push from index k to end then from index 0 to k
+3)
+
+**Link to Work:**
+
+javascript
+
+function toys(ar,k){
+    ar.sort((a,b)=>{return b[0]-a[0]})
+    let sortedToys = ar.sort()
+    let recommendedToys = []
+    let inc = 0
+    for (let x=0;x<sortedToys.length && inc < k;x++){
+        inc+=sortedToys[x][0]
+        if (inc > k){
+            break
+        }
+        recommendedToys.push(sortedToys[x][1])
+    }
+    return recommendedToys
+}
+
+let question = [[9,1],[3,2],[1,3],[5,4]]
+let answer = toys(question,10)
+console.log(answer)
+
+function leftRotation(ar,k){
+    if (k > ar.length - 1){
+        return ar
+    }
+    let newAr = []
+    for(let x=k;x<ar.length;x++){
+        newAr.push(ar[x])
+    }
+    for(let x=0;x<k;x++){
+        newAr.push(ar[x])
+    }
+    return newAr
+}
+
+let question = [1,2,3,4,5]
+let answer = leftRotation(question,2)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+type toys [][]int
+
+func (t toys) Len() int {
+	return len(t)
+}
+
+func (t toys) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
+}
+
+func (t toys) Less(i, j int) bool {
+	return t[i][0] < t[j][0]
+}
+
+func findToys(ar [][]int, k int) []int {
+	var sortedToys toys = toys(ar)
+	sort.Sort(sortedToys)
+	var recToys []int
+	m := 0
+	for x := 0; x < len(sortedToys) && m < k; x++ {
+		m += sortedToys[x][0]
+		if m > k {
+			break
+		}
+		recToys = append(recToys, sortedToys[x][1])
+	}
+	return recToys
+}
+
+func main() {
+	var question = [][]int{{9, 1}, {3, 2}, {1, 3}, {5, 4}}
+	answer := findToys(question, 10)
+	fmt.Println(answer)
+}
+
+package main
+
+import (
+	"fmt"
+)
+
+func leftRotation(ar []int, k int) []int {
+	if k-1 > len(ar) {
+		return ar
+	}
+	var newAr []int
+	newAr = ar[k:]
+	newAr = append(newAr, ar[:k]...)
+	return newAr
+}
+
+func main() {
+	var question = []int{1, 2, 3, 4, 5}
+	answer := leftRotation(question, 2)
+	fmt.Println(answer)
+}

@@ -1,16 +1,17 @@
-function isAnagram(a,b){
-    if (a.length != b.length){
-        return false
+function leftRotation(ar,k){
+    if (k > ar.length - 1){
+        return ar
     }
-    let firstSum = 0
-    let secondSum = 0
-    for (let x=0;x<a.length;x++){
-        firstSum+=a.charCodeAt(x)
-        secondSum+=b.charCodeAt(x)
+    let newAr = []
+    for(let x=k;x<ar.length;x++){
+        newAr.push(ar[x])
     }
-    return firstSum == secondSum
+    for(let x=0;x<k;x++){
+        newAr.push(ar[x])
+    }
+    return newAr
 }
 
-let question = "PEOPLE"
-let answer = isAnagram(question,"EPPLO")
+let question = [1,2,3,4,5]
+let answer = leftRotation(question,2)
 console.log(answer)

@@ -4,23 +4,18 @@ import (
 	"fmt"
 )
 
-func isAnagram(a, b string) bool {
-	if len(a) != len(b) {
-		return false
+func leftRotation(ar []int, k int) []int {
+	if k-1 > len(ar) {
+		return ar
 	}
-	var firstArr []byte = []byte(a)
-	var secondArr []byte = []byte(b)
-	var firstSum byte
-	var secondSum byte
-	for x := 0; x < len(firstArr); x++ {
-		firstSum += firstArr[x]
-		secondSum += secondArr[x]
-	}
-	return firstSum == secondSum
+	var newAr []int
+	newAr = ar[k:]
+	newAr = append(newAr, ar[:k]...)
+	return newAr
 }
 
 func main() {
-	var question string = "PEOPLE"
-	answer := isAnagram(question, "PLEOEP")
+	var question = []int{1, 2, 3, 4, 5}
+	answer := leftRotation(question, 2)
 	fmt.Println(answer)
 }
