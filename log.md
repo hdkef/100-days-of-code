@@ -1180,3 +1180,80 @@ func main() {
 	answer := leftRotation(question, 2)
 	fmt.Println(answer)
 }
+
+
+
+
+
+
+
+### Day 20: 6th Apr 2021
+
+**Today's Progress:**
+i learned how to solve hackerrank sum hourglass in javascript and golang.
+
+**Thoughts:**
+basically double while loop and sum the hourglass index relative
+
+**Link to Work:**
+
+javascript
+
+function sumHourGlass(ar){
+    let n = ar.length
+    let sum = 0
+    let i = 0
+    while (i + 2 < n){
+        let j = 0
+        while (j + 2 < n){
+            if (j + 2 >= n){
+                break
+            }
+            let hourGlass = ar[i][j] + ar[i][j+1] + ar[i][j+2] + ar[i+2][j] + ar[i+2][j+1] + ar[i+2][j+2] + ar[i+1][j+1]
+            sum += hourGlass
+            j++
+        }
+        i++
+    }
+    return sum
+}
+
+let question = [[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]
+let answer = sumHourGlass(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+)
+
+func sumHourGlass(ar [][]int) int {
+	n := len(ar)
+	i := 0
+	sum := 0
+	for {
+		j := 0
+		if i+2 >= n {
+			break
+		}
+		for {
+			if j+2 >= n {
+				break
+			}
+			hourGlass := ar[i][j] + ar[i][j+1] + ar[i][j+2] + ar[i+1][j] + ar[i+1][j+1] + ar[i+1][j+2] + ar[i+1][j+1]
+			sum += hourGlass
+			j++
+		}
+		i++
+	}
+	return sum
+}
+
+func main() {
+	var question = [][]int{{1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}}
+	answer := sumHourGlass(question)
+	fmt.Println(answer)
+}
