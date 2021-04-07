@@ -1257,3 +1257,52 @@ func main() {
 	answer := sumHourGlass(question)
 	fmt.Println(answer)
 }
+
+### Day 21: 7th Apr 2021
+
+**Today's Progress:**
+i learned how to solve hackerrank two strings in javascript and golang.
+
+**Thoughts:**
+basically for loop and check contains for every word in argument 1
+
+**Link to Work:**
+
+javascript
+
+function twoStrings(a1,a2){
+    for (let x=0;x < a1.length; x++){
+        if (a2.includes(a1[x])){
+            return true
+        }
+    }
+    return false
+}
+
+let question = "Hello"
+let answer = twoStrings(question,"z")
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func twoStrings(a1, a2 string) bool {
+	for i, _ := range a1 {
+		if strings.Contains(a2, string(a1[i])) == true {
+			return true
+		}
+	}
+	return false
+}
+
+func main() {
+	var question string = "hello"
+	answer := twoStrings(question, "zzz")
+	fmt.Println(answer)
+}

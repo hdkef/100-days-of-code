@@ -2,32 +2,20 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
-func sumHourGlass(ar [][]int) int {
-	n := len(ar)
-	i := 0
-	sum := 0
-	for {
-		j := 0
-		if i+2 >= n {
-			break
+func twoStrings(a1, a2 string) bool {
+	for i, _ := range a1 {
+		if strings.Contains(a2, string(a1[i])) == true {
+			return true
 		}
-		for {
-			if j+2 >= n {
-				break
-			}
-			hourGlass := ar[i][j] + ar[i][j+1] + ar[i][j+2] + ar[i+1][j] + ar[i+1][j+1] + ar[i+1][j+2] + ar[i+1][j+1]
-			sum += hourGlass
-			j++
-		}
-		i++
 	}
-	return sum
+	return false
 }
 
 func main() {
-	var question = [][]int{{1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1}}
-	answer := sumHourGlass(question)
+	var question string = "hello"
+	answer := twoStrings(question, "zzz")
 	fmt.Println(answer)
 }

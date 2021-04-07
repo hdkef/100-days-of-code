@@ -1,22 +1,12 @@
-function sumHourGlass(ar){
-    let n = ar.length
-    let sum = 0
-    let i = 0
-    while (i + 2 < n){
-        let j = 0
-        while (j + 2 < n){
-            if (j + 2 >= n){
-                break
-            }
-            let hourGlass = ar[i][j] + ar[i][j+1] + ar[i][j+2] + ar[i+2][j] + ar[i+2][j+1] + ar[i+2][j+2] + ar[i+1][j+1]
-            sum += hourGlass
-            j++
+function twoStrings(a1,a2){
+    for (let x=0;x < a1.length; x++){
+        if (a2.includes(a1[x])){
+            return true
         }
-        i++
     }
-    return sum
+    return false
 }
 
-let question = [[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1],[1,1,1,1,1,1]]
-let answer = sumHourGlass(question)
+let question = "Hello"
+let answer = twoStrings(question,"z")
 console.log(answer)
