@@ -1306,3 +1306,82 @@ func main() {
 	answer := twoStrings(question, "zzz")
 	fmt.Println(answer)
 }
+
+### Day 22: 8th Apr 2021
+
+**Today's Progress:**
+i learned how to solve leetcode number of island in javascript and golang.
+
+**Thoughts:**
+basically for loop and check if it 1 or island then recursively change that chain of 1 into 0.
+In Golang use pointer btw.
+
+**Link to Work:**
+
+javascript
+
+function numIsland(arr){
+    let islandNum = 0
+    for (let i=0;i < arr.length;i++){
+        for(let j=0;j < arr[i].length;j++){
+            if (arr[i][j] == 1){
+                islandNum++
+                findAndDestroy(arr,i,j)
+            }
+        }
+    }
+    return islandNum
+}
+
+function findAndDestroy(arr,i,j){
+    if (i < 0 || i > arr.length-1 || j < 0 || j > arr[i].length - 1 || arr[i][j] == 0){
+        return
+    }
+    arr[i][j] = 0
+    findAndDestroy(arr,i+1,j)
+    findAndDestroy(arr,i-1,j)
+    findAndDestroy(arr,i,j+1)
+    findAndDestroy(arr,i,j-1)
+}
+
+let question = [[1,1,1,1],[1,1,0,0],[1,0,0,0],[0,0,1,1],[1,0,0,0]]
+let answer = numIsland(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+)
+
+func numIsland(arr [][]int) int {
+	islandNum := 0
+	for i, _ := range arr {
+		for j, _ := range arr[i] {
+			if arr[i][j] == 1 {
+				islandNum++
+				findAndDestroy(&arr, i, j)
+			}
+		}
+	}
+	return islandNum
+}
+
+func findAndDestroy(arr *[][]int, i int, j int) {
+	if i < 0 || i > len(*arr)-1 || j < 0 || j > len((*arr)[i])-1 || (*arr)[i][j] == 0 {
+		return
+	}
+	(*arr)[i][j] = 0
+	findAndDestroy(arr, i+1, j)
+	findAndDestroy(arr, i-1, j)
+	findAndDestroy(arr, i, j+1)
+	findAndDestroy(arr, i, j-1)
+}
+
+func main() {
+	question := [][]int{{1, 1, 1, 1}, {1, 1, 0, 0}, {1, 0, 0, 0}, {0, 0, 1, 1}, {1, 0, 0, 0}}
+	answer := numIsland(question)
+	fmt.Println(answer)
+}
