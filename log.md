@@ -1385,3 +1385,70 @@ func main() {
 	answer := numIsland(question)
 	fmt.Println(answer)
 }
+
+### Day 23: 9th Apr 2021
+
+**Today's Progress:**
+i learned how to solve leetcode pascal triangle in javascript and golang.
+
+**Thoughts:**
+basically double for loop, first loop is normal. Then create prevRow and NewRow. prevRow is index - 1 of triangle. Don't forget to continue if index = 0. After that second loop is begin from j = 1 to j < i. To be noticed that addition is always start from index 1 (because we'll add 1 num before) and j never exceeded i for example 1 3 3 1... number in the middle (3,3) is always lower than that index (3). Finally each loop is add previous item and current item [j-1]+ [j].
+
+**Link to Work:**
+
+javascript
+
+function pascalTriangle(k){
+    let triangle = []
+    triangle.push([1])
+    for (let i = 0;i < k;i++){
+        if (i <= 0){
+            continue
+        }
+        let prevRow = triangle[i-1]
+        let newRow = [1]
+        for(let j = 1; j < i; j++){
+         newRow.push(prevRow[j-1]+prevRow[j])   
+        }
+        newRow.push(1)
+        triangle.push(newRow)
+    }
+    return triangle
+}
+
+let question = 5
+let answer = pascalTriangle(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+)
+
+func pascalTriangle(k int) [][]int {
+	triangle := [][]int{}
+	triangle = append(triangle, []int{1})
+	for i := 0; i < k; i++ {
+		if i <= 0 {
+			continue
+		} else {
+			prevRow := triangle[i-1]
+			newRow := []int{1}
+			for j := 0; j < i-1; j++ {
+				newRow = append(newRow, prevRow[j+1]+prevRow[j])
+			}
+			newRow = append(newRow, 1)
+			triangle = append(triangle, newRow)
+		}
+	}
+	return triangle
+}
+
+func main() {
+	question := 5
+	answer := pascalTriangle(question)
+	fmt.Println(answer)
+}

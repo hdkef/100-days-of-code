@@ -4,32 +4,27 @@ import (
 	"fmt"
 )
 
-func numIsland(arr [][]int) int {
-	islandNum := 0
-	for i, _ := range arr {
-		for j, _ := range arr[i] {
-			if arr[i][j] == 1 {
-				islandNum++
-				findAndDestroy(&arr, i, j)
+func pascalTriangle(k int) [][]int {
+	triangle := [][]int{}
+	triangle = append(triangle, []int{1})
+	for i := 0; i < k; i++ {
+		if i <= 0 {
+			continue
+		} else {
+			prevRow := triangle[i-1]
+			newRow := []int{1}
+			for j := 0; j < i-1; j++ {
+				newRow = append(newRow, prevRow[j+1]+prevRow[j])
 			}
+			newRow = append(newRow, 1)
+			triangle = append(triangle, newRow)
 		}
 	}
-	return islandNum
-}
-
-func findAndDestroy(arr *[][]int, i int, j int) {
-	if i < 0 || i > len(*arr)-1 || j < 0 || j > len((*arr)[i])-1 || (*arr)[i][j] == 0 {
-		return
-	}
-	(*arr)[i][j] = 0
-	findAndDestroy(arr, i+1, j)
-	findAndDestroy(arr, i-1, j)
-	findAndDestroy(arr, i, j+1)
-	findAndDestroy(arr, i, j-1)
+	return triangle
 }
 
 func main() {
-	question := [][]int{{1, 1, 1, 1}, {1, 1, 0, 0}, {1, 0, 0, 0}, {0, 0, 1, 1}, {1, 0, 0, 0}}
-	answer := numIsland(question)
+	question := 5
+	answer := pascalTriangle(question)
 	fmt.Println(answer)
 }

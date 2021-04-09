@@ -1,27 +1,21 @@
-function numIsland(arr){
-    let islandNum = 0
-    for (let i=0;i < arr.length;i++){
-        for(let j=0;j < arr[i].length;j++){
-            if (arr[i][j] == 1){
-                islandNum++
-                findAndDestroy(arr,i,j)
-            }
+function pascalTriangle(k){
+    let triangle = []
+    triangle.push([1])
+    for (let i = 0;i < k;i++){
+        if (i <= 0){
+            continue
         }
+        let prevRow = triangle[i-1]
+        let newRow = [1]
+        for(let j = 1; j < i; j++){
+         newRow.push(prevRow[j-1]+prevRow[j])   
+        }
+        newRow.push(1)
+        triangle.push(newRow)
     }
-    return islandNum
+    return triangle
 }
 
-function findAndDestroy(arr,i,j){
-    if (i < 0 || i > arr.length-1 || j < 0 || j > arr[i].length - 1 || arr[i][j] == 0){
-        return
-    }
-    arr[i][j] = 0
-    findAndDestroy(arr,i+1,j)
-    findAndDestroy(arr,i-1,j)
-    findAndDestroy(arr,i,j+1)
-    findAndDestroy(arr,i,j-1)
-}
-
-let question = [[1,1,1,1],[1,1,0,0],[1,0,0,0],[0,0,1,1],[1,0,0,0]]
-let answer = numIsland(question)
+let question = 5
+let answer = pascalTriangle(question)
 console.log(answer)
