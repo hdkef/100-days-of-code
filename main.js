@@ -1,21 +1,15 @@
-function pascalTriangle(k){
-    let triangle = []
-    triangle.push([1])
-    for (let i = 0;i < k;i++){
-        if (i <= 0){
-            continue
+function findDuplicate(ar){
+    let tmpMap = new Map()
+    for (x of ar){
+        if (tmpMap.get(x)){
+            return true
+        } else {
+            tmpMap.set(x,x)
         }
-        let prevRow = triangle[i-1]
-        let newRow = [1]
-        for(let j = 1; j < i; j++){
-         newRow.push(prevRow[j-1]+prevRow[j])   
-        }
-        newRow.push(1)
-        triangle.push(newRow)
     }
-    return triangle
+    return false
 }
 
-let question = 5
-let answer = pascalTriangle(question)
+let question = [1,2,3,4,5,6,7,8,9]
+let answer = findDuplicate(question)
 console.log(answer)

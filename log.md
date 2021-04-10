@@ -1452,3 +1452,59 @@ func main() {
 	answer := pascalTriangle(question)
 	fmt.Println(answer)
 }
+
+
+### Day 24: 10th Apr 2021
+
+**Today's Progress:**
+i learned how to solve leetcode find duplicate in javascript and golang.
+
+**Thoughts:**
+each item assign in map, if not found then set key, value if found then return true
+
+**Link to Work:**
+
+javascript
+
+function findDuplicate(ar){
+    let tmpMap = new Map()
+    for (x of ar){
+        if (tmpMap.get(x)){
+            return true
+        } else {
+            tmpMap.set(x,x)
+        }
+    }
+    return false
+}
+
+let question = [1,2,3,4,5,6,7,8,9]
+let answer = findDuplicate(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+)
+
+func findDuplicate(ar []int) bool {
+	tmpMap := make(map[int]int)
+	for x := 0; x < len(ar); x++ {
+		_, y := tmpMap[ar[x]]
+		if y == false {
+			tmpMap[ar[x]] = ar[x]
+		} else {
+			return true
+		}
+	}
+	return false
+}
+
+func main() {
+	question := []int{1, 2, 3, 4, 5, 6, 7, 9}
+	answer := findDuplicate(question)
+	fmt.Println(answer)
+}

@@ -4,27 +4,21 @@ import (
 	"fmt"
 )
 
-func pascalTriangle(k int) [][]int {
-	triangle := [][]int{}
-	triangle = append(triangle, []int{1})
-	for i := 0; i < k; i++ {
-		if i <= 0 {
-			continue
+func findDuplicate(ar []int) bool {
+	tmpMap := make(map[int]int)
+	for x := 0; x < len(ar); x++ {
+		_, y := tmpMap[ar[x]]
+		if y == false {
+			tmpMap[ar[x]] = ar[x]
 		} else {
-			prevRow := triangle[i-1]
-			newRow := []int{1}
-			for j := 0; j < i-1; j++ {
-				newRow = append(newRow, prevRow[j+1]+prevRow[j])
-			}
-			newRow = append(newRow, 1)
-			triangle = append(triangle, newRow)
+			return true
 		}
 	}
-	return triangle
+	return false
 }
 
 func main() {
-	question := 5
-	answer := pascalTriangle(question)
+	question := []int{1, 2, 3, 4, 5, 6, 7, 9}
+	answer := findDuplicate(question)
 	fmt.Println(answer)
 }
