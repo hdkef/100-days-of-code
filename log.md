@@ -1570,3 +1570,55 @@ func main() {
 	answer := twoSum(question, 8)
 	fmt.Println(answer)
 }
+
+### Day 26: 12th Apr 2021
+
+**Today's Progress:**
+i learned how to solve leetcode palindrome number in javascript and golang.
+
+**Thoughts:**
+cast int to string (stringify), split that, for loop (reversed) and append to newAr... return newAr.join == stringify
+
+**Link to Work:**
+
+javascript
+
+function palindromeNumber(a){
+    let stringify = a.toString()
+    let charArr = stringify.split("")
+    let reversedArr = []
+    for (let x=charArr.length-1;x>=0;x--){
+        reversedArr.push(charArr[x])
+    }
+    return reversedArr.join("") == a
+}
+
+let question = 11111111
+let answer = palindromeNumber(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func palindromeNumber(a int) bool {
+	stringify := fmt.Sprint(a)
+	charArr := strings.Split(stringify, "")
+	var reverseArr []string
+	for x := len(charArr) - 1; x >= 0; x-- {
+		reverseArr = append(reverseArr, charArr[x])
+	}
+	return strings.Join(reverseArr, "") == stringify
+}
+
+func main() {
+	question := 121
+	answer := palindromeNumber(question)
+	fmt.Println(answer)
+}
+
