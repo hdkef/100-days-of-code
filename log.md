@@ -1622,3 +1622,83 @@ func main() {
 	fmt.Println(answer)
 }
 
+
+### Day 26: 12th Apr 2021
+
+**Today's Progress:**
+i learned how to solve binary search in javascript and golang.
+
+**Thoughts:**
+while loop, create first index and last index, and find middle index. if value of middle index is bigger than target than last index equal middle index and vice versa. Return index if middle == target. Don't forget to check if last index / first index == k
+
+**Link to Work:**
+
+javascript
+
+function BinarySearch(ar,k){
+    first_i = 0
+    last_i = ar.length - 1
+    middle_i = Math.ceil((first_i+last_i)/2)
+    while (first_i <= last_i){
+        if(ar[middle_i] < k){
+            if (ar[last_i] == k){
+                return last_i
+            }
+            first_i = middle_i
+            middle_i = Math.ceil((first_i+last_i)/2)
+        }else if(ar[middle_i] > k){
+            if (ar[first_i] == k){
+                return first_i
+            }
+            last_i = middle_i
+            middle_i = Math.ceil((first_i+last_i)/2)
+        }else if (ar[middle_i] == k){
+            return middle_i
+        }
+    }
+}
+
+let question = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+let answer = BinarySearch(question,7)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func binarySearch(ar []int, k int) int {
+	first_i := 0
+	last_i := len(ar) - 1
+	middle_i := math.Ceil((float64(first_i) + float64(last_i)) / 2)
+
+	for {
+		if ar[int(middle_i)] < k {
+			if ar[last_i] == k {
+				return last_i
+			}
+			first_i = int(middle_i)
+			middle_i = math.Ceil((float64(first_i) + float64(last_i)) / 2)
+		} else if ar[int(middle_i)] > k {
+			if ar[first_i] == k {
+				return first_i
+			}
+			last_i = int(middle_i)
+			middle_i = math.Ceil((float64(first_i) + float64(last_i)) / 2)
+		} else if ar[int(middle_i)] == k {
+			return int(middle_i)
+		}
+	}
+}
+
+func main() {
+	question := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
+	answer := binarySearch(question, 7)
+	fmt.Println(answer)
+}
+
+
