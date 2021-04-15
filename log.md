@@ -1623,7 +1623,7 @@ func main() {
 }
 
 
-### Day 26: 12th Apr 2021
+### Day 27: 13th Apr 2021
 
 **Today's Progress:**
 i learned how to solve binary search in javascript and golang.
@@ -1701,4 +1701,170 @@ func main() {
 	fmt.Println(answer)
 }
 
+### Day 28: 14th Apr 2021
 
+**Today's Progress:**
+i learned how to solve key and rooms challenge in javascript and golang.
+
+**Thoughts:**
+bikin 2 map (seen dan rooms), 1 stack (key).
+awalnya for loop dulu masukin semua item di array ke map rooms.
+push key dengan index 0 karena pertama kali akses ruangan index 0.
+Kemudian pop si key sehingga didapat current key.
+Setelah itu for loop setiap item di map menggunakan current key.
+Pada setiap perulangan, cek rooms[curkey][i] apakah ada di map seen atau tidak.
+Jika, tidak maka seen[rooms[curkey][i]] = true dan masukkan keynya ke stack.
+key.push(rooms[curkey][i])
+return len(seen) == len(array)
+
+**Link to Work:**
+
+javascript
+
+function keyAndRoom(ar){
+    let rooms = new Map()
+    let seen = new Map()
+    let keys = []
+    seen.set(0,true)
+    keys.push(0)
+    for (let x=0;x < ar.length;x++){
+        rooms.set(x,ar[x])
+    }
+    while (keys.length != 0){
+        let curKey = keys.pop()
+        
+        for(let x = 0;x < rooms.get(curKey).length;x++){
+            if (!seen.get(rooms.get(curKey)[x])){
+                seen.set(rooms.get(curKey)[x],true)
+                keys.push(rooms.get(curKey)[x])
+            }
+        }
+    }
+    return seen.size == ar.length
+}
+
+let question = [[1],[2],[3],[4],[5],[6],[2]]
+let answer = keyAndRoom(question,7)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+)
+
+func keyandRoom(ar [][]int) bool {
+	keys := []int{}
+	rooms := make(map[int][]int)
+	seen := make(map[int]bool)
+
+	for x := 0; x < len(ar); x++ {
+		rooms[x] = ar[x]
+	}
+
+	keys = append(keys, 0)
+	seen[0] = true
+
+	for {
+		if len(keys) <= 0 {
+			break
+		}
+		curKey := keys[len(keys)-1]
+		keys = keys[:len(keys)-1]
+		for i := 0; i < len(rooms[curKey]); i++ {
+			if seen[rooms[curKey][i]] != true {
+				seen[rooms[curKey][i]] = true
+				keys = append(keys, rooms[curKey][i])
+			}
+		}
+	}
+
+	return len(seen) == len(ar)
+}
+
+func main() {
+	question := [][]int{{1}, {2}, {3}, {4}, {5}, {6}}
+	answer := keyandRoom(question)
+	fmt.Println(answer)
+}
+
+### Day 29: 15th Apr 2021
+
+**Today's Progress:**
+i learned how to solve container with most water challenge in javascript and golang.
+
+**Thoughts:**
+create tmp = 0.
+do double for loop. and then check if the heights (ar[i] < ar[j] or vice versa).
+then check if size = math.abs(i - j) * ar[i] //or ar[j] is greater than tmp. If it is then
+tmp = size
+
+**Link to Work:**
+
+javascript
+
+function containerWithMostWater(ar){
+    let tmpSize = 0
+    for(let i = 0;i < ar.length;i++){
+        for(let j = 0;j < ar.length;j++){
+            if (j == i){
+                continue
+            }
+            else {
+                if (ar[i] < ar[j]){
+                    let size = Math.abs((i-j)) * ar[i]
+                    if (size > tmpSize){
+                        tmpSize = size
+                    }
+                }else{
+                    let size = Math.abs((i-j)) * ar[j]
+                    if (size > tmpSize){
+                        tmpSize = size
+                    }
+                }
+            }
+        }
+    }
+    return tmpSize
+}
+
+let question = [1,99999,2222,3,3333,5,7,90]
+let answer = containerWithMostWater(question)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func containerWithMostWater(ar []int) float64 {
+	tmp := 0.0
+	for i := 0; i < len(ar); i++ {
+		for j := 0; j < len(ar); j++ {
+			if ar[i] < ar[j] {
+				size := math.Abs(float64(i)-float64(j)) * float64(ar[i])
+				if size > tmp {
+					tmp = size
+				}
+			} else {
+				size := math.Abs(float64(i)-float64(j)) * float64(ar[j])
+				if size > tmp {
+					tmp = size
+				}
+			}
+		}
+	}
+	return tmp
+}
+
+func main() {
+	question := []int{1, 99999, 2222, 3, 3333, 5, 7, 90}
+	answer := containerWithMostWater(question)
+	fmt.Println(answer)
+}

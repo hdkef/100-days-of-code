@@ -1,26 +1,28 @@
-function BinarySearch(ar,k){
-    first_i = 0
-    last_i = ar.length - 1
-    middle_i = Math.ceil((first_i+last_i)/2)
-    while (first_i <= last_i){
-        if(ar[middle_i] < k){
-            if (ar[last_i] == k){
-                return last_i
+function containerWithMostWater(ar){
+    let tmpSize = 0
+    for(let i = 0;i < ar.length;i++){
+        for(let j = 0;j < ar.length;j++){
+            if (j == i){
+                continue
             }
-            first_i = middle_i
-            middle_i = Math.ceil((first_i+last_i)/2)
-        }else if(ar[middle_i] > k){
-            if (ar[first_i] == k){
-                return first_i
+            else {
+                if (ar[i] < ar[j]){
+                    let size = Math.abs((i-j)) * ar[i]
+                    if (size > tmpSize){
+                        tmpSize = size
+                    }
+                }else{
+                    let size = Math.abs((i-j)) * ar[j]
+                    if (size > tmpSize){
+                        tmpSize = size
+                    }
+                }
             }
-            last_i = middle_i
-            middle_i = Math.ceil((first_i+last_i)/2)
-        }else if (ar[middle_i] == k){
-            return middle_i
         }
     }
+    return tmpSize
 }
 
-let question = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
-let answer = BinarySearch(question,7)
+let question = [1,99999,2222,3,3333,5,7,90]
+let answer = containerWithMostWater(question)
 console.log(answer)
