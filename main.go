@@ -5,28 +5,33 @@ import (
 	"math"
 )
 
-func containerWithMostWater(ar []int) float64 {
-	tmp := 0.0
+func threeSum(ar []int, k int) []int {
+	res := math.MaxInt64
+	resAr := []int{}
 	for i := 0; i < len(ar); i++ {
-		for j := 0; j < len(ar); j++ {
-			if ar[i] < ar[j] {
-				size := math.Abs(float64(i)-float64(j)) * float64(ar[i])
-				if size > tmp {
-					tmp = size
-				}
+		a_pointer := 0
+		b_pointer := len(ar) - 1
+		for {
+			tmp := ar[i] + ar[a_pointer] + ar[b_pointer]
+			if a_pointer >= b_pointer {
+				break
+			}
+			if ar[a_pointer]+ar[b_pointer] > k {
+				b_pointer--
 			} else {
-				size := math.Abs(float64(i)-float64(j)) * float64(ar[j])
-				if size > tmp {
-					tmp = size
-				}
+				a_pointer++
+			}
+			if math.Abs(float64(tmp)-float64(k)) < math.Abs(float64(res)-float64(k)) {
+				res = tmp
+				resAr = []int{ar[i], ar[a_pointer], ar[b_pointer]}
 			}
 		}
 	}
-	return tmp
+	return resAr
 }
 
 func main() {
-	question := []int{1, 99999, 2222, 3, 3333, 5, 7, 90}
-	answer := containerWithMostWater(question)
+	question := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
+	answer := threeSum(question, 19)
 	fmt.Println(answer)
 }

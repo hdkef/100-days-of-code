@@ -1868,3 +1868,86 @@ func main() {
 	answer := containerWithMostWater(question)
 	fmt.Println(answer)
 }
+
+### Day 30: 16th Apr 2021
+
+**Today's Progress:**
+i learned how to solve leet code 3 sums challenge in javascript and golang.
+
+**Thoughts:**
+create for loop.
+do two pointer technique for each loop with a_pointer = i+1 and b_pointer = len(ar)-1.
+each loop calculate tmp = ar[i] + ar[a_pointer] + b[b_pointer].
+check if |tmp - target| < |result - target|.
+if it is, change result = tmp
+
+**Link to Work:**
+
+javascript
+
+function threeSum(ar,k){
+    let res = Number.POSITIVE_INFINITY
+    let resAr = []
+    for (let i = 0;i < ar.length;i++){
+        let a_pointer = i+1
+        let b_pointer = ar.length - 1
+        while (a_pointer < b_pointer){
+            let tmp = ar[a_pointer] + ar[b_pointer] + ar[i]
+            if (ar[a_pointer] + ar[b_pointer] > k){
+                b_pointer--
+            }else{
+                a_pointer++
+            }
+            if (Math.abs(tmp - k) < Math.abs(res - k)){
+                res = tmp
+                resAr = [ar[a_pointer],ar[b_pointer],ar[i]]
+            }
+        }
+        return resAr
+    }
+    
+}
+
+let question = [1,2,3,4,5,6,7,8,9,10,11]
+let answer = threeSum(question,19)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func threeSum(ar []int, k int) []int {
+	res := math.MaxInt64
+	resAr := []int{}
+	for i := 0; i < len(ar); i++ {
+		a_pointer := 0
+		b_pointer := len(ar) - 1
+		for {
+			tmp := ar[i] + ar[a_pointer] + ar[b_pointer]
+			if a_pointer >= b_pointer {
+				break
+			}
+			if ar[a_pointer]+ar[b_pointer] > k {
+				b_pointer--
+			} else {
+				a_pointer++
+			}
+			if math.Abs(float64(tmp)-float64(k)) < math.Abs(float64(res)-float64(k)) {
+				res = tmp
+				resAr = []int{ar[i], ar[a_pointer], ar[b_pointer]}
+			}
+		}
+	}
+	return resAr
+}
+
+func main() {
+	question := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
+	answer := threeSum(question, 19)
+	fmt.Println(answer)
+}
