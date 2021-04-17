@@ -1,26 +1,21 @@
-function threeSum(ar,k){
-    let res = Number.POSITIVE_INFINITY
-    let resAr = []
-    for (let i = 0;i < ar.length;i++){
-        let a_pointer = i+1
-        let b_pointer = ar.length - 1
-        while (a_pointer < b_pointer){
-            let tmp = ar[a_pointer] + ar[b_pointer] + ar[i]
-            if (ar[a_pointer] + ar[b_pointer] > k){
-                b_pointer--
-            }else{
-                a_pointer++
+function handOfStraight(ar,k){
+    if (ar.length % k != 0){
+        return []
+    }else{
+        ar.sort((a,b)=>{return a-b})
+        let groupCount = ar.length / k
+        let grouped = []
+        for(let i = 0;i < ar.length;i+=groupCount){
+            let tmp = []
+            for(let j=i;j<=i+groupCount-1;j++){
+                tmp.push(ar[j])
             }
-            if (Math.abs(tmp - k) < Math.abs(res - k)){
-                res = tmp
-                resAr = [ar[a_pointer],ar[b_pointer],ar[i]]
-            }
+            grouped.push(tmp)
         }
-        return resAr
+        return grouped
     }
-    
 }
 
-let question = [1,2,3,4,5,6,7,8,9,10,11]
-let answer = threeSum(question,19)
+let question = [12,11,10,9,8,7,6,5,4,3,2,1]
+let answer = handOfStraight(question,4)
 console.log(answer)

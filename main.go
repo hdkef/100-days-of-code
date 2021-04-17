@@ -2,36 +2,45 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"sort"
 )
 
-func threeSum(ar []int, k int) []int {
-	res := math.MaxInt64
-	resAr := []int{}
-	for i := 0; i < len(ar); i++ {
-		a_pointer := 0
-		b_pointer := len(ar) - 1
-		for {
-			tmp := ar[i] + ar[a_pointer] + ar[b_pointer]
-			if a_pointer >= b_pointer {
-				break
+type cards []int
+
+func (c cards) Len() int {
+	return len(c)
+}
+
+func (c cards) Swap(a, b int) {
+	c[a], c[b] = c[b], c[a]
+}
+
+func (c cards) Less(a, b int) bool {
+	return c[a] < c[b]
+}
+
+func handOfStraight(ar []int, k int) [][]int {
+	cards := cards(ar)
+	sort.Sort(cards)
+	groupModulus := len(ar) % k
+	if groupModulus != 0 {
+		return [][]int{}
+	} else {
+		var groupResult [][]int
+		totalGroup := len(ar) / k
+		for i := 0; i < len(ar); i += totalGroup {
+			var grouped []int
+			for j := i; j <= i+totalGroup-1; j++ {
+				grouped = append(grouped, ar[j])
 			}
-			if ar[a_pointer]+ar[b_pointer] > k {
-				b_pointer--
-			} else {
-				a_pointer++
-			}
-			if math.Abs(float64(tmp)-float64(k)) < math.Abs(float64(res)-float64(k)) {
-				res = tmp
-				resAr = []int{ar[i], ar[a_pointer], ar[b_pointer]}
-			}
+			groupResult = append(groupResult, grouped)
 		}
+		return groupResult
 	}
-	return resAr
 }
 
 func main() {
-	question := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
-	answer := threeSum(question, 19)
+	question := []int{12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
+	answer := handOfStraight(question, 4)
 	fmt.Println(answer)
 }

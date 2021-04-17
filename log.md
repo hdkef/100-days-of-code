@@ -1903,9 +1903,8 @@ function threeSum(ar,k){
                 resAr = [ar[a_pointer],ar[b_pointer],ar[i]]
             }
         }
-        return resAr
     }
-    
+	return resAr
 }
 
 let question = [1,2,3,4,5,6,7,8,9,10,11]
@@ -1949,5 +1948,95 @@ func threeSum(ar []int, k int) []int {
 func main() {
 	question := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
 	answer := threeSum(question, 19)
+	fmt.Println(answer)
+}
+
+### Day 31: 17th Apr 2021
+
+**Today's Progress:**
+i learned how to solve leet code hands of straight challenge in javascript and golang.
+
+**Thoughts:**
+check whether len(ar) % k != 0.
+sort the array. 
+double for loop.
+first loop this conditions i = 0;i < len(ar);i+=totalGroup.
+second loop this conditions j = i; j <= i + totalGroup - 1;j++.
+each second loop append ar[j] to tmpAr.
+each firs loop append tmpAr to resultAr.
+return resultAr.
+
+**Link to Work:**
+
+javascript
+
+function handOfStraight(ar,k){
+    if (ar.length % k != 0){
+        return []
+    }else{
+        ar.sort((a,b)=>{return a-b})
+        let groupCount = ar.length / k
+        let grouped = []
+        for(let i = 0;i < ar.length;i+=groupCount){
+            let tmp = []
+            for(let j=i;j<=i+groupCount-1;j++){
+                tmp.push(ar[j])
+            }
+            grouped.push(tmp)
+        }
+        return grouped
+    }
+}
+
+let question = [12,11,10,9,8,7,6,5,4,3,2,1]
+let answer = handOfStraight(question,4)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+type cards []int
+
+func (c cards) Len() int {
+	return len(c)
+}
+
+func (c cards) Swap(a, b int) {
+	c[a], c[b] = c[b], c[a]
+}
+
+func (c cards) Less(a, b int) bool {
+	return c[a] < c[b]
+}
+
+func handOfStraight(ar []int, k int) [][]int {
+	cards := cards(ar)
+	sort.Sort(cards)
+	groupModulus := len(ar) % k
+	if groupModulus != 0 {
+		return [][]int{}
+	} else {
+		var groupResult [][]int
+		totalGroup := len(ar) / k
+		for i := 0; i < len(ar); i += totalGroup {
+			var grouped []int
+			for j := i; j <= i+totalGroup-1; j++ {
+				grouped = append(grouped, ar[j])
+			}
+			groupResult = append(groupResult, grouped)
+		}
+		return groupResult
+	}
+}
+
+func main() {
+	question := []int{12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
+	answer := handOfStraight(question, 4)
 	fmt.Println(answer)
 }
