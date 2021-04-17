@@ -2,45 +2,46 @@ package main
 
 import (
 	"fmt"
-	"sort"
+	"math"
 )
 
-type cards []int
-
-func (c cards) Len() int {
-	return len(c)
-}
-
-func (c cards) Swap(a, b int) {
-	c[a], c[b] = c[b], c[a]
-}
-
-func (c cards) Less(a, b int) bool {
-	return c[a] < c[b]
-}
-
-func handOfStraight(ar []int, k int) [][]int {
-	cards := cards(ar)
-	sort.Sort(cards)
-	groupModulus := len(ar) % k
-	if groupModulus != 0 {
-		return [][]int{}
-	} else {
-		var groupResult [][]int
-		totalGroup := len(ar) / k
-		for i := 0; i < len(ar); i += totalGroup {
-			var grouped []int
-			for j := i; j <= i+totalGroup-1; j++ {
-				grouped = append(grouped, ar[j])
-			}
-			groupResult = append(groupResult, grouped)
+func firstBadCode(ar []int, apiCall func(s int) bool) string {
+	a_index := 0
+	b_index := len(ar) - 1
+	a_pointer := ar[a_index]
+	b_pointer := ar[b_index]
+	step := 0
+	m_index := int(math.Floor((float64(a_index) + float64(b_index)) * 0.5))
+	m_pointer := ar[m_index]
+	for {
+		m_index = int(math.Floor((float64(a_index) + float64(b_index)) * 0.5))
+		m_pointer = ar[m_index]
+		if a_pointer >= b_pointer {
+			break
 		}
-		return groupResult
+		if apiCall(m_pointer) == true {
+			step++
+			b_index = m_index
+			b_pointer = ar[b_index]
+		} else {
+			step++
+			a_index = m_index + 1
+			a_pointer = ar[a_index]
+		}
+	}
+	return fmt.Sprintf("step: %v firstbad : %v", step, m_pointer)
+}
+
+func apiCall(s int) bool {
+	if s >= 17 {
+		return true
+	} else {
+		return false
 	}
 }
 
 func main() {
-	question := []int{12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
-	answer := handOfStraight(question, 4)
+	question := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24}
+	answer := firstBadCode(question, apiCall)
 	fmt.Println(answer)
 }

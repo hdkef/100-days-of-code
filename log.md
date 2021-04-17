@@ -2040,3 +2040,109 @@ func main() {
 	answer := handOfStraight(question, 4)
 	fmt.Println(answer)
 }
+
+### Day 32: 18th Apr 2021
+
+**Today's Progress:**
+i learned how to solve leet code fastest method api call challenge in javascript and golang.
+
+**Thoughts:**
+Similar to binary search.
+While loop a_pointer < b_pointer.
+m_index = floor 1/2 * (a_index + b_index).
+m_pointer = ar[m_index].
+if apiCall(m_pointer) == true, then a_index = m_index, a_pointer = m_pointer.
+else b_index = m_index + 1 ####+ 1 is required so that it breaks the loop
+then return m_pointer
+
+**Link to Work:**
+
+javascript
+
+function firstBadCode(ar,apiCall){
+    let a_index = 0
+    let b_index = ar.length - 1
+    let mid_index = Math.floor((a_index+b_index)*0.5)
+    let a_pointer = ar[a_index]
+    let mid_pointer = ar[mid_index]
+    let b_pointer = ar[b_index]
+    let step = 0
+    while (a_pointer < b_pointer){
+        mid_index = Math.floor((a_index+b_index)*0.5)
+        mid_pointer = ar[mid_index]
+        let result = apiCall(mid_pointer)
+        if (result == true){
+            step++
+            b_index = mid_index
+            b_pointer = ar[b_index]
+        }
+        else{
+            step++
+            a_index = mid_index + 1
+            a_pointer = ar[a_index]
+        }
+    }
+    return `step: ${step}, first bad: ${ar[mid_pointer]}`
+}
+
+function ApiCall(version){
+    if (version >= 17){
+        return true
+    } else{
+        return false
+    }
+}
+
+let question = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+let answer = firstBadCode(question, ApiCall)
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func firstBadCode(ar []int, apiCall func(s int) bool) string {
+	a_index := 0
+	b_index := len(ar) - 1
+	a_pointer := ar[a_index]
+	b_pointer := ar[b_index]
+	step := 0
+	m_index := int(math.Floor((float64(a_index) + float64(b_index)) * 0.5))
+	m_pointer := ar[m_index]
+	for {
+		m_index = int(math.Floor((float64(a_index) + float64(b_index)) * 0.5))
+		m_pointer = ar[m_index]
+		if a_pointer >= b_pointer {
+			break
+		}
+		if apiCall(m_pointer) == true {
+			step++
+			b_index = m_index
+			b_pointer = ar[b_index]
+		} else {
+			step++
+			a_index = m_index + 1
+			a_pointer = ar[a_index]
+		}
+	}
+	return fmt.Sprintf("step: %v firstbad : %v", step, m_pointer)
+}
+
+func apiCall(s int) bool {
+	if s >= 17 {
+		return true
+	} else {
+		return false
+	}
+}
+
+func main() {
+	question := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24}
+	answer := firstBadCode(question, apiCall)
+	fmt.Println(answer)
+}
