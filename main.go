@@ -2,34 +2,30 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"strings"
 )
 
-func firstBadCode(ar []int, apiCall func(s int) bool) string {
-	a_index := 0
-	b_index := len(ar) - 1
-	a_pointer := ar[a_index]
-	b_pointer := ar[b_index]
-	step := 0
-	m_index := int(math.Floor((float64(a_index) + float64(b_index)) * 0.5))
-	m_pointer := ar[m_index]
-	for {
-		m_index = int(math.Floor((float64(a_index) + float64(b_index)) * 0.5))
-		m_pointer = ar[m_index]
-		if a_pointer >= b_pointer {
-			break
-		}
-		if apiCall(m_pointer) == true {
-			step++
-			b_index = m_index
-			b_pointer = ar[b_index]
+func backOrigin(path string) bool {
+	pathAr := strings.Split(path, "")
+	var U []int
+	var D []int
+	var R []int
+	var L []int
+	for i := 0; i < len(pathAr); i++ {
+		if pathAr[i] == "U" {
+			U = append(U, 1)
+		} else if pathAr[i] == "D" {
+			D = append(D, 1)
+		} else if pathAr[i] == "R" {
+			R = append(R, 1)
+		} else if pathAr[i] == "L" {
+			L = append(L, 1)
 		} else {
-			step++
-			a_index = m_index + 1
-			a_pointer = ar[a_index]
+			return false
 		}
 	}
-	return fmt.Sprintf("step: %v firstbad : %v", step, m_pointer)
+
+	return len(U) == len(D) && len(R) == len(L)
 }
 
 func apiCall(s int) bool {
@@ -41,7 +37,7 @@ func apiCall(s int) bool {
 }
 
 func main() {
-	question := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24}
-	answer := firstBadCode(question, apiCall)
+	question := "UUUULLLLDDDDRRRRD"
+	answer := backOrigin(question)
 	fmt.Println(answer)
 }

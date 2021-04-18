@@ -1,37 +1,31 @@
-function firstBadCode(ar,apiCall){
-    let a_index = 0
-    let b_index = ar.length - 1
-    let mid_index = Math.floor((a_index+b_index)*0.5)
-    let a_pointer = ar[a_index]
-    let mid_pointer = ar[mid_index]
-    let b_pointer = ar[b_index]
-    let step = 0
-    while (a_pointer < b_pointer){
-        mid_index = Math.floor((a_index+b_index)*0.5)
-        mid_pointer = ar[mid_index]
-        let result = apiCall(mid_pointer)
-        if (result == true){
-            step++
-            b_index = mid_index
-            b_pointer = ar[b_index]
-        }
-        else{
-            step++
-            a_index = mid_index + 1
-            a_pointer = ar[a_index]
+function backOrigin(path){
+    let pathAr = path.split("")
+    let U = []
+    let D = []
+    let R = []
+    let L = []
+    for (let x=0;x<pathAr.length;x++){
+        switch(pathAr[x]){
+            case "U":
+                U.push("U")
+                break
+            case "D":
+                D.push("D")
+                break
+            case "R":
+                R.push("R")
+                break
+            case "L":
+                L.push("L")
+                break
+            default:
+                return false
         }
     }
-    return `step: ${step}, first bad: ${ar[mid_pointer]}`
+
+    return U.length == D.length && R.length == L.length
 }
 
-function ApiCall(version){
-    if (version >= 17){
-        return true
-    } else{
-        return false
-    }
-}
-
-let question = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
-let answer = firstBadCode(question, ApiCall)
+let question = "UUULLLDDDRRR"
+let answer = backOrigin(question)
 console.log(answer)
