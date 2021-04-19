@@ -2,42 +2,32 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"reflect"
 )
 
-func backOrigin(path string) bool {
-	pathAr := strings.Split(path, "")
-	var U []int
-	var D []int
-	var R []int
-	var L []int
-	for i := 0; i < len(pathAr); i++ {
-		if pathAr[i] == "U" {
-			U = append(U, 1)
-		} else if pathAr[i] == "D" {
-			D = append(D, 1)
-		} else if pathAr[i] == "R" {
-			R = append(R, 1)
-		} else if pathAr[i] == "L" {
-			L = append(L, 1)
+func backOrigin(s1, s2 string) bool {
+	var s1Ar []string
+	var s2Ar []string
+	for i := 0; i < len(s1); i++ {
+		if string(s1[i]) == "#" {
+			s1Ar = s1Ar[:len(s1Ar)-1]
 		} else {
-			return false
+			s1Ar = append(s1Ar, string(s1[i]))
+		}
+	}
+	for i := 0; i < len(s2); i++ {
+		if string(s2[i]) == "#" {
+			s2Ar = s2Ar[:len(s2Ar)-1]
+		} else {
+			s2Ar = append(s2Ar, string(s2[i]))
 		}
 	}
 
-	return len(U) == len(D) && len(R) == len(L)
-}
-
-func apiCall(s int) bool {
-	if s >= 17 {
-		return true
-	} else {
-		return false
-	}
+	return reflect.DeepEqual(s1Ar, s2Ar)
 }
 
 func main() {
-	question := "UUUULLLLDDDDRRRRD"
-	answer := backOrigin(question)
+	question := "abcde#####"
+	answer := backOrigin(question, "xyzvb####s#")
 	fmt.Println(answer)
 }

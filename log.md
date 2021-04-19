@@ -2239,3 +2239,79 @@ func main() {
 	answer := backOrigin(question)
 	fmt.Println(answer)
 }
+
+### Day 33: 19th Apr 2021
+
+**Today's Progress:**
+i learned how to solve leet code backspace string challenge in javascript and golang.
+
+**Thoughts:**
+for loop the string.
+pop if #.
+push if else.
+return a = b.
+
+**Link to Work:**
+
+javascript
+
+function backspaceString(s1,s2){
+    let s1Ar = []
+    let s2Ar = []
+    for (let i=0;i<s1.length;i++){
+        if (s1[i]=="#"){
+            s1Ar.pop()
+        }else {
+            s1Ar.push(s1[i])
+        }
+    }
+    for (let i=0;i<s2.length;i++){
+        if (s2[i]=="#"){
+            s2Ar.pop()
+        }else {
+            s2Ar.push(s1[i])
+        }
+    }
+
+    return s1Ar.values == s2Ar.values
+}
+
+let question = "U#BC##d#"
+let answer = backspaceString(question,"xyZ###q#")
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func backOrigin(s1, s2 string) bool {
+	var s1Ar []string
+	var s2Ar []string
+	for i := 0; i < len(s1); i++ {
+		if string(s1[i]) == "#" {
+			s1Ar = s1Ar[:len(s1Ar)-1]
+		} else {
+			s1Ar = append(s1Ar, string(s1[i]))
+		}
+	}
+	for i := 0; i < len(s2); i++ {
+		if string(s2[i]) == "#" {
+			s2Ar = s2Ar[:len(s2Ar)-1]
+		} else {
+			s2Ar = append(s2Ar, string(s2[i]))
+		}
+	}
+
+	return reflect.DeepEqual(s1Ar, s2Ar)
+}
+
+func main() {
+	question := "abcde#####"
+	answer := backOrigin(question, "xyzvb####s#")
+	fmt.Println(answer)
+}
