@@ -1,24 +1,17 @@
-function backspaceString(s1,s2){
-    let s1Ar = []
-    let s2Ar = []
-    for (let i=0;i<s1.length;i++){
-        if (s1[i]=="#"){
-            s1Ar.pop()
-        }else {
-            s1Ar.push(s1[i])
-        }
-    }
-    for (let i=0;i<s2.length;i++){
-        if (s2[i]=="#"){
-            s2Ar.pop()
-        }else {
-            s2Ar.push(s1[i])
+function jewelsAndStones(j,s){
+    let count = 0
+    
+    for(let i=0;i < s.length; i++) {
+        for(let k=0;k < j.length;k++){
+            if (s[i] == j[k]){
+                count++
+            }
         }
     }
 
-    return s1Ar.values == s2Ar.values
+    return count
 }
 
-let question = "U#BC##d#"
-let answer = backspaceString(question,"xyZ###q#")
+let question = "abc"
+let answer = jewelsAndStones(question,"aaabbcc")
 console.log(answer)

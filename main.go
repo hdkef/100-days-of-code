@@ -2,32 +2,22 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 )
 
-func backOrigin(s1, s2 string) bool {
-	var s1Ar []string
-	var s2Ar []string
-	for i := 0; i < len(s1); i++ {
-		if string(s1[i]) == "#" {
-			s1Ar = s1Ar[:len(s1Ar)-1]
-		} else {
-			s1Ar = append(s1Ar, string(s1[i]))
+func jewelsAndStones(j, s string) int {
+	var count int
+	for i := 0; i < len(j); i++ {
+		for k := 0; k < len(s); k++ {
+			if j[i] == s[k] {
+				count++
+			}
 		}
 	}
-	for i := 0; i < len(s2); i++ {
-		if string(s2[i]) == "#" {
-			s2Ar = s2Ar[:len(s2Ar)-1]
-		} else {
-			s2Ar = append(s2Ar, string(s2[i]))
-		}
-	}
-
-	return reflect.DeepEqual(s1Ar, s2Ar)
+	return count
 }
 
 func main() {
-	question := "abcde#####"
-	answer := backOrigin(question, "xyzvb####s#")
+	question := "abc"
+	answer := jewelsAndStones(question, "aaabbbccc")
 	fmt.Println(answer)
 }

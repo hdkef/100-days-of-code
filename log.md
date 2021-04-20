@@ -2315,3 +2315,63 @@ func main() {
 	answer := backOrigin(question, "xyzvb####s#")
 	fmt.Println(answer)
 }
+
+### Day 34: 20th Apr 2021
+
+**Today's Progress:**
+i learned how to solve leet code stone and jewel challenge in javascript and golang.
+
+**Thoughts:**
+simply just double for loop.
+for loop the jewel.
+for loop the stone.
+check if s[i] == j[k] if its is increment++
+return the increment result 
+
+**Link to Work:**
+
+javascript
+
+function jewelsAndStones(j,s){
+    let count = 0
+    
+    for(let i=0;i < s.length; i++) {
+        for(let k=0;k < j.length;k++){
+            if (s[i] == j[k]){
+                count++
+            }
+        }
+    }
+
+    return count
+}
+
+let question = "abc"
+let answer = jewelsAndStones(question,"aaabbcc")
+console.log(answer)
+
+golang
+
+package main
+
+import (
+	"fmt"
+)
+
+func jewelsAndStones(j, s string) int {
+	var count int
+	for i := 0; i < len(j); i++ {
+		for k := 0; k < len(s); k++ {
+			if j[i] == s[k] {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func main() {
+	question := "abc"
+	answer := jewelsAndStones(question, "aaabbbccc")
+	fmt.Println(answer)
+}
