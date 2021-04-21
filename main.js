@@ -1,17 +1,21 @@
-function jewelsAndStones(j,s){
-    let count = 0
-    
-    for(let i=0;i < s.length; i++) {
-        for(let k=0;k < j.length;k++){
-            if (s[i] == j[k]){
-                count++
-            }
+function reveseOnlyLetter(s){
+    letterOnly = []
+    reversed = []
+    for(let i=0;i<s.length;i++){
+        if (s[i] != "-"){
+            letterOnly.push(s[i])
         }
     }
-
-    return count
+    for(let j=0;j<s.length;j++){
+        if(s[j] != "-"){
+            reversed.push(letterOnly.pop())
+        }else{
+            reversed.push(s[j])
+        }
+    }
+    return reversed.join("")
 }
 
-let question = "abc"
-let answer = jewelsAndStones(question,"aaabbcc")
+let question = "bismi-lah-irahman"
+let answer = reveseOnlyLetter(question)
 console.log(answer)
